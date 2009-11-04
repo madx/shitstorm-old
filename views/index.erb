@@ -1,0 +1,26 @@
+<div id="filter">
+  <form action="/" method="get">
+    <input type="text" name="q" value="<%= params[:q] %>" />
+    <input type="submit" value="<%= dict[:search] %>" />
+  </form>
+</div>
+
+<ul id="issues">
+  <% @issues.each do |issue| %>
+  <li class="issue <%= issue.status %>">
+    <span class="details">
+      <span class="id">#<%= issue.id %></span>
+      <span class="comment_count">(<%= issue.comments.length %>)</span>
+      <span class="ctime"><%= issue.ctime.strftime("%F %R") %></span>
+      <span class="author">
+        <%= author_search_link(issue) %>
+      </span>
+    </span>
+    <span class="title">
+      <a href="<%= issue.url %>" title="<%= dict[:view_issue] %>"><%=
+        issue.title
+      %></a>
+    </span>
+  </li>
+  <% end %>
+</ul>

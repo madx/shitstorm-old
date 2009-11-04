@@ -1,0 +1,141 @@
+body
+  :margin 0
+  :background white url('/data/gradient.png') top left repeat-x
+  :color #333
+
+a:link, a:visited
+  :padding 1px
+  :color #258
+  :text-decoration none
+  &.cancel
+    :color red
+  &:hover, &:focus, &:active
+    :color #47a
+    :text-decoration underline
+    &.cancel
+      :color white
+      :background-color red
+
+h1
+  :margin 0
+  :padding 0.25em 0.5em
+  :background-color black
+  :color white
+  :position relative
+  a:link, a:visited
+    :color white
+    :text-decoration none
+    &:hover, &:focus, &:active
+      :color white
+      :text-decoration none
+
+  img
+    :position absolute
+    :right 0.5em
+    :top 0.5em
+    :cursor pointer
+
+h3
+  :font-size 1.1em
+  :border-bottom 1px solid #888
+
+form
+  p
+    :margin 0 0 0.25em
+    :position relative
+  label
+    :width 20%
+    :position absolute
+    :top 0.25em
+    :left 0
+    :font-weight bold
+  input[type=text], textarea, select, input[type=submit]
+    :margin-left 10%
+  .long_field, textarea
+    :width 80%
+
+#issues, #issue, #filter, #new, #new_issue
+  :width 80%
+  :margin 1em auto
+  :padding 0
+
+#new
+  :display none
+  :background-color white
+  :border 1px solid #888
+  :padding 0.5em 0.75em
+  h3
+    :margin-top 0
+
+#filter
+  :margin 1em auto
+  :position relative
+  input[type=text]
+    :width 83%
+    :margin 0 2% 0 0
+  input[type=submit]
+    :position absolute
+    :right 0
+    :width 15%
+
+#issues
+  :list-style-type none
+
+  .issue
+    :background-color white
+    :display block
+    :margin 0 0 2px
+    :padding 0.5em 0.75em 0.5em 30px
+
+    .title
+      :padding 0 0.5em 0 0
+    .details
+      :margin-top 0.1em
+      :float right
+      :font-size 0.8em
+      :color #888
+      .id
+        :font-weight bold
+        :padding 2px 4px
+
+  .open
+    :background white url('/data/flag_open.png') 5px 5px no-repeat
+  .closed
+    :background white url('/data/flag_closed.png') 5px 5px no-repeat
+  .pending
+    :background white url('/data/flag_pending.png') 5px 5px no-repeat
+  .rejected
+    :background white url('/data/flag_rejected.png') 5px 5px no-repeat
+
+#issue
+  :background-color white
+  :padding 0.5em 0.75em
+  h2
+    :font-size 1.2em
+    :margin 0
+    :border-bottom 1px solid #888
+  .issue_report
+    :font-size 0.9em
+    :margin 0
+    :padding 0.25em 0.5em
+    :color #888
+    :font-variant italic
+  .issue_description
+    :background-color #efefef
+    :padding 0.5em
+  .comment
+    .comment_report
+      :font-size 0.9em
+      :margin 0 0 1em
+      :padding 0.25em 0.5em
+      :color #888
+      :font-variant italic
+    .comment_body
+      :background-color #efefef
+      :padding 0.5em
+
+#footer
+  :text-align center
+  :font-size 0.8em
+  :color #888
+  :font-style italic

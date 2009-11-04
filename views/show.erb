@@ -1,0 +1,64 @@
+<div id="issue">
+  <h2>
+    <img src="/data/flag_<%= @issue.status %>.png" alt="<%=
+      dict[@issue.status.to_sym]
+    %>" />
+    <%= @issue.title %>
+  </h2>
+
+  <p class="issue_report">
+    <%= dict[:created_on] % @issue.ctime.strftime(dict[:timefmt]) %>
+    <%= author_search_link(@issue) %>
+  </p>
+
+  <% unless @issue.description.empty? %>
+  <div class="issue_description">
+    <%= @issue.description %>
+  </div>
+  <% end %>
+
+  <h3><%= dict[:comments] %></h3>
+
+  <% if @issue.comments.empty? %>
+    <p>No comments yet</p>
+  <% else %>
+  <% @issue.comments.each do |comment| %>
+  <div class="comment">
+    <div class="comment_body"><%= comment.body %></div>
+    <p class="comment_report">
+      <%= dict[:posted_on] % comment.ctime.strftime(dict[:timefmt]) %>
+      <%= author_search_link(comment) %>
+    </p>
+  </div>
+  <% end %>
+  <% end %>
+
+  <h3><%= dict[:add_comment] %></h3>
+  <div id="new_comment">
+    <form action="<%= @issue.url %>" method="post">
+      <input type="hidden" name="_method" value="put" />
+
+      <p>
+        <label for="author"><%= dict[:author] %></label>
+        <%= author_field %>
+      </p>
+
+      <p>
+        <label for="body"><%= dict[:contents] %></label>
+        <textarea name="body" rows="7" cols="80"></textarea>
+      </p>
+
+      <p>
+      <label for="status"><%= dict[:status] %>:</label>
+      <select name="status">
+        <%= option_tag :open, @issue.status %>
+        <%= option_tag :closed, @issue.status %>
+        <%= option_tag :pending, @issue.status %>
+        <%= option_tag :rejected, @issue.status %>
+      </select>
+      </p>
+
+      <input type="submit" value="<%= dict[:submit] %>" />
+    </form>
+  </div>
+</div>

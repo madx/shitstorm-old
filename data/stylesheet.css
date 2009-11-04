@@ -1,0 +1,171 @@
+body {
+  margin: 0;
+  background: white url('/data/gradient.png') top left repeat-x;
+  color: #333;
+}
+
+a:link, a:visited {
+  padding: 1px;
+  color: #258;
+  text-decoration: none;
+}
+a:link.cancel, a:visited.cancel {
+  color: red;
+}
+a:link:hover, a:link:focus, a:link:active, a:visited:hover, a:visited:focus, a:visited:active {
+  color: #47a;
+  text-decoration: underline;
+}
+a:link:hover.cancel, a:link:focus.cancel, a:link:active.cancel, a:visited:hover.cancel, a:visited:focus.cancel, a:visited:active.cancel {
+  color: white;
+  background-color: red;
+}
+
+h1 {
+  margin: 0;
+  padding: 0.25em 0.5em;
+  background-color: black;
+  color: white;
+  position: relative;
+}
+h1 a:link, h1 a:visited {
+  color: white;
+  text-decoration: none;
+}
+h1 a:link:hover, h1 a:link:focus, h1 a:link:active, h1 a:visited:hover, h1 a:visited:focus, h1 a:visited:active {
+  color: white;
+  text-decoration: none;
+}
+h1 img {
+  position: absolute;
+  right: 0.5em;
+  top: 0.5em;
+  cursor: pointer;
+}
+
+h3 {
+  font-size: 1.1em;
+  border-bottom: 1px solid #888;
+}
+
+form p {
+  margin: 0 0 0.25em;
+  position: relative;
+}
+form label {
+  width: 20%;
+  position: absolute;
+  top: 0.25em;
+  left: 0;
+  font-weight: bold;
+}
+form input[type=text], form textarea, form select, form input[type=submit] {
+  margin-left: 10%;
+}
+form .long_field, form textarea {
+  width: 80%;
+}
+
+#issues, #issue, #filter, #new, #new_issue {
+  width: 80%;
+  margin: 1em auto;
+  padding: 0;
+}
+
+#new {
+  display: none;
+  background-color: white;
+  border: 1px solid #888;
+  padding: 0.5em 0.75em;
+}
+#new h3 {
+  margin-top: 0;
+}
+
+#filter {
+  margin: 1em auto;
+  position: relative;
+}
+#filter input[type=text] {
+  width: 83%;
+  margin: 0 2% 0 0;
+}
+#filter input[type=submit] {
+  position: absolute;
+  right: 0;
+  width: 15%;
+}
+
+#issues {
+  list-style-type: none;
+}
+#issues .issue {
+  background-color: white;
+  display: block;
+  margin: 0 0 2px;
+  padding: 0.5em 0.75em 0.5em 30px;
+}
+#issues .issue .id {
+  font-weight: bold;
+  padding: 2px 4px;
+}
+#issues .issue .title {
+  padding: 0 0.5em 0 0;
+}
+#issues .issue .details {
+  margin-top: 0.1em;
+  float: right;
+  font-size: 0.8em;
+  color: #888;
+}
+#issues .open {
+  background: white url('/data/flag_open.png') 5px 5px no-repeat;
+}
+#issues .closed {
+  background: white url('/data/flag_closed.png') 5px 5px no-repeat;
+}
+#issues .pending {
+  background: white url('/data/flag_pending.png') 5px 5px no-repeat;
+}
+#issues .rejected {
+  background: white url('/data/flag_rejected.png') 5px 5px no-repeat;
+}
+
+#issue {
+  background-color: white;
+  padding: 0.5em 0.75em;
+}
+#issue h2 {
+  font-size: 1.2em;
+  margin: 0;
+  border-bottom: 1px solid #888;
+}
+#issue .issue_report {
+  font-size: 0.9em;
+  margin: 0;
+  padding: 0.25em 0.5em;
+  color: #888;
+  font-variant: italic;
+}
+#issue .issue_description {
+  background-color: #efefef;
+  padding: 0.5em;
+}
+#issue .comment .comment_report {
+  font-size: 0.9em;
+  margin: 0 0 1em;
+  padding: 0.25em 0.5em;
+  color: #888;
+  font-variant: italic;
+}
+#issue .comment .comment_body {
+  background-color: #efefef;
+  padding: 0.5em;
+}
+
+#footer {
+  text-align: center;
+  font-size: 0.8em;
+  color: #888;
+  font-style: italic;
+}
