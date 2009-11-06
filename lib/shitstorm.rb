@@ -12,9 +12,12 @@ module ShitStorm
   class App < Sinatra::Base
 
     configure do
-      set :haml, :attr_wrapper => "'"
-      set :lang, "en"
-      set :dict, Proc.new { YAML.load(File.read("lang/#{lang}.yml")) }
+      set :haml,  :attr_wrapper => "'"
+      set :lang,  "en"
+      set :name,  "ShitStorm"
+      set :url,   "http://example.com/"
+      set :email, "admin@example.com"
+      set :dict,  Proc.new { YAML.load(File.read("lang/#{lang}.yml")) }
       set :methodoverride, true
     end
 
