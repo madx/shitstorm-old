@@ -5,9 +5,11 @@
 
   <p class="entry_report">
     <%= dict[:created_on] % @entry.ctime.strftime(dict[:timefmt]) %>
+    <% unless @entry.url.empty? %>
     <span class="entry_url">
       <a href="<%= @entry.url%>"><%= dict[:link] %></a>
     </span>
+    <% end %>
   </p>
 
   <div class="entry_body">

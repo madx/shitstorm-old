@@ -63,13 +63,13 @@ module ShitStorm
     get '/feed' do
       content_type 'application/atom+xml'
 
-      @entries = []
+      @entries = Entry.order(:id.desc).limit(20)
 
       builder :feed
     end
 
     get '/log' do
-      @entries = Entry.order(:ctime.desc)
+      @entries = Entry.order(:id.desc)
 
       erb :log
     end
@@ -105,6 +105,14 @@ module ShitStorm
       Issue.create(params.merge({:ctime => Time.now, :status => "open"}))
 
       redirect '/'
+    end
+
+    post '/log' do
+      halt 500 if params[:title].empty?
+
+      Entry.create(params.merge({:ctime => Time.now}))
+
+      redirect '/log'
     end
 
     put '/:id' do
@@ -157,7 +165,7 @@ module ShitStorm
     end
 
     def self.search(query)
-      return Issue.order(:ctime.desc) unless query
+      return Issue.order(:id.desc) unless query
 
       filter(query.split(/ +/).map { |chunk|
         case chunk
@@ -170,7 +178,7 @@ module ShitStorm
           else
             :title.like("%#{chunk}%")
         end
-      }.inject {|f,e| e & f }).order(:ctime.desc)
+      }.inject {|f,e| e & f }).order(:id.desc)
     end
   end
 

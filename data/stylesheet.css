@@ -187,14 +187,14 @@ form .long_field, form textarea {
   color: #888;
   font-variant: italic;
 }
-#issue .issue_description, #issue .entry_description, #entry .issue_description, #entry .entry_description {
+#issue .issue_description, #issue .entry_body, #entry .issue_description, #entry .entry_body {
   background-color: #efefef;
   padding: 0.5em;
 }
-#issue .issue_description *:first-child, #issue .entry_description *:first-child, #entry .issue_description *:first-child, #entry .entry_description *:first-child {
+#issue .issue_description *:first-child, #issue .entry_body *:first-child, #entry .issue_description *:first-child, #entry .entry_body *:first-child {
   margin-top: 0;
 }
-#issue .issue_description *:last-child, #issue .entry_description *:last-child, #entry .issue_description *:last-child, #entry .entry_description *:last-child {
+#issue .issue_description *:last-child, #issue .entry_body *:last-child, #entry .issue_description *:last-child, #entry .entry_body *:last-child {
   margin-bottom: 0;
 }
 #issue .comment .comment_report, #entry .comment .comment_report {

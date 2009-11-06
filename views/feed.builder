@@ -26,7 +26,7 @@ xml.feed :xmlns => "http://www.w3.org/2005/Atom" do
       xml.link :rel => "alternate", :href => entry.url
       xml.summary :type => "xhtml" do
         xml.div :xmlns => "http://www.w3.org/1999/xhtml" do
-          xml << entry.contents
+          xml << entry.body
         end
       end
     end
