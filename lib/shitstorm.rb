@@ -121,9 +121,11 @@ module ShitStorm
 
       raise NotFound unless issue = Issue[params[:id]]
 
-      comment = Comment.create(params.reject { |k,v|
+      data = params.reject { |k,v|
         !%w(author body).member?(k)
-      }.update({:issue_id => params[:id], :ctime => Time.now}))
+      }.update({:issue_id => params[:id], :ctime => Time.now})
+
+      Comment.create(data)
 
       if params[:status] != issue.status
         issue.update(:status => params[:status])
@@ -147,15 +149,22 @@ module ShitStorm
     end
 
     def after_update
+      super
+
+      entry = Entry.order(:id).last
+      body  = entry.body
+      entry.destroy
+
       Entry.create do |entry|
         entry.title = App.dict[:log_status] % [author, id, status]
         entry.ctime = Time.now
         entry.url   = url
-        entry.body  = App.dict[:log_status] % [author, id, status]
+        entry.body  = body
       end
     end
 
     def after_create
+      super
       Entry.create do |entry|
         entry.title = App.dict[:log_issue] % [author, id]
         entry.ctime = Time.now
@@ -191,6 +200,7 @@ module ShitStorm
     end
 
     def after_create
+      super
       Entry.create do |entry|
         entry.title = App.dict[:log_comment] % [author, issue_id]
         entry.ctime = Time.now
