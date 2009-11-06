@@ -57,8 +57,7 @@ module ShitStorm
     get '/data/:file' do
       halt 403 if params[:file].index ".."
 
-      content_type File.extname(params[:file])
-      File.read(File.join('data', params[:file]))
+      send_file(File.join('data', params[:file]))
     end
 
     get '/' do
