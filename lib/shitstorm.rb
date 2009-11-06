@@ -68,6 +68,12 @@ module ShitStorm
       builder :feed
     end
 
+    get '/log' do
+      @entries = Entry.order(:ctime.desc)
+
+      erb :log
+    end
+
     get '/' do
       @issues = Issue.search(params[:q])
 
@@ -100,7 +106,9 @@ module ShitStorm
         !%w(author body).member?(k)
       }.update({:issue_id => params[:id], :ctime => Time.now}))
 
-      issue.update(:status => params[:status])
+      if params[:status] != issue.status
+        issue.update(:status => params[:status])
+      end
 
       redirect issue.url
     end
@@ -117,6 +125,24 @@ module ShitStorm
     def before_create
       super
       @values[:description] = Markup.new(description).to_html
+    end
+
+    def after_update
+      Entry.create do |entry|
+        entry.title = App.dict[:log_status] % [author, id, status]
+        entry.ctime = Time.now
+        entry.url   = File.join(App.url, id.to_s)
+        entry.body  = App.dict[:log_status] % [author, id, status]
+      end
+    end
+
+    def after_create
+      Entry.create do |entry|
+        entry.title = App.dict[:log_issue] % [author, id]
+        entry.ctime = Time.now
+        entry.url   = File.join(App.url, id.to_s)
+        entry.body  = description
+      end
     end
 
     def self.search(query)
@@ -145,8 +171,20 @@ module ShitStorm
       @values[:body] = Markup.new(body).to_html
     end
 
+    def after_create
+      Entry.create do |entry|
+        entry.title = App.dict[:log_comment] % [author, issue_id]
+        entry.ctime = Time.now
+        entry.url   = File.join(App.url, issue_id.to_s)
+        entry.body = body
+      end
+    end
+
     def issue
       Issue[:id => issue_id]
     end
+  end
+
+  class Entry < Sequel::Model
   end
 end
