@@ -12,6 +12,7 @@
 :created_on: "Created on %s"
 :description: "Description"
 :home: "Return to issues list"
+:log: "%s log"
 :new_issue: "New issue"
 :open: "Open"
 :pending: "Pending"

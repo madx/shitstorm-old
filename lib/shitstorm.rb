@@ -60,6 +60,14 @@ module ShitStorm
       send_file(File.join('data', params[:file]))
     end
 
+    get '/feed' do
+      content_type 'application/atom+xml'
+
+      @entries = []
+
+      builder :feed
+    end
+
     get '/' do
       @issues = Issue.search(params[:q])
 
