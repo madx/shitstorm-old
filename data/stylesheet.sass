@@ -42,17 +42,13 @@ h3
 form
   p
     :margin 0 0 0.25em
-    :position relative
   label
-    :width 20%
-    :position absolute
-    :top 0.25em
-    :left 0
     :font-weight bold
+    :display block
   input[type=text], textarea, select, input[type=submit]
-    :margin-left 10%
+    :margin 0.25em 0 1em 0
   .long_field, textarea
-    :width 80%
+    :width 60%
 
 #issues, #issue, #filter, #new, #new_issue
   :width 80%
@@ -62,7 +58,6 @@ form
 #new
   :display none
   :background-color white
-  :border 1px solid #888
   :padding 0.5em 0.75em
   h3
     :margin-top 0
@@ -75,6 +70,7 @@ form
     :margin 0 2% 0 0
   input[type=submit]
     :position absolute
+    :margin 0
     :right 0
     :width 15%
 

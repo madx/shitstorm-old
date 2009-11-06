@@ -50,20 +50,16 @@ h3 {
 
 form p {
   margin: 0 0 0.25em;
-  position: relative;
 }
 form label {
-  width: 20%;
-  position: absolute;
-  top: 0.25em;
-  left: 0;
   font-weight: bold;
+  display: block;
 }
 form input[type=text], form textarea, form select, form input[type=submit] {
-  margin-left: 10%;
+  margin: 0.25em 0 1em 0;
 }
 form .long_field, form textarea {
-  width: 80%;
+  width: 60%;
 }
 
 #issues, #issue, #filter, #new, #new_issue {
@@ -75,7 +71,6 @@ form .long_field, form textarea {
 #new {
   display: none;
   background-color: white;
-  border: 1px solid #888;
   padding: 0.5em 0.75em;
 }
 #new h3 {
@@ -92,6 +87,7 @@ form .long_field, form textarea {
 }
 #filter input[type=submit] {
   position: absolute;
+  margin: 0;
   right: 0;
   width: 15%;
 }
