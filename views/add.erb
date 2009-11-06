@@ -1,0 +1,21 @@
+<div id="new">
+  <h3><%= dict[:new_issue] %></h3>
+  <form action="/" method="post">
+    <p>
+      <label for="author"><%= dict[:author] %></label>
+      <%= author_field %>
+    </p>
+    <p>
+      <label for="title"><%= dict[:title] %></label>
+      <input type="text" name="title" class="long_field" />
+    </p>
+    <p>
+      <label for="description"><%= dict[:description] %></label>
+      <textarea name="description" rows="7" cols="80"></textarea>
+    </p>
+    <input type="submit" value="<%= dict[:submit] %>" />
+    or
+    <a href="/" class="cancel"><%= dict[:cancel] %></a>
+  </form>
+</div>
+

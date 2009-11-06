@@ -1,0 +1,16 @@
+<div id="entry">
+  <h2>
+    <%= @entry.title %>
+  </h2>
+
+  <p class="entry_report">
+    <%= dict[:created_on] % @entry.ctime.strftime(dict[:timefmt]) %>
+    <span class="entry_url">
+      <a href="<%= @entry.url%>"><%= dict[:link] %></a>
+    </span>
+  </p>
+
+  <div class="entry_body">
+    <%= @entry.body %>
+  </div>
+</div>

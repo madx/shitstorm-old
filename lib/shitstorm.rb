@@ -74,17 +74,28 @@ module ShitStorm
       erb :log
     end
 
+    get '/add' do
+      erb :add
+    end
+
     get '/' do
       @issues = Issue.search(params[:q])
 
       erb :index
     end
 
+    get '/log/:id' do
+      @entry = Entry[params[:id]]
+      raise NotFound unless @entry
+
+      erb :entry
+    end
+
     get '/:id' do
       @issue = Issue[params[:id]]
       raise NotFound unless @issue
 
-      erb :show
+      erb :issue
     end
 
     post '/' do

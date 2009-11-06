@@ -1,5 +1,5 @@
-$(function() {
-  $("h1 img").click(function() {
-    $("#new").toggle();
-  });
-});
+// $(function() {
+//   $("h1 add_issue_lnk").click(function() {
+//     $("#new").toggle();
+//   });
+// });

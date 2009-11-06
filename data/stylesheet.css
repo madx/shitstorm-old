@@ -19,6 +19,7 @@ a:link:hover, a:link:focus, a:link:active, a:visited:hover, a:visited:focus, a:v
 a:link:hover.cancel, a:link:focus.cancel, a:link:active.cancel, a:visited:hover.cancel, a:visited:focus.cancel, a:visited:active.cancel {
   color: white;
   background-color: red;
+  text-decoration: none;
 }
 
 h1 {
@@ -36,11 +37,22 @@ h1 a:link:hover, h1 a:link:focus, h1 a:link:active, h1 a:visited:hover, h1 a:vis
   color: white;
   text-decoration: none;
 }
-h1 img {
+h1 #menu {
+  font-size: 0.5em;
   position: absolute;
-  right: 0.5em;
-  top: 0.5em;
-  cursor: pointer;
+  right: 1em;
+  top: 1em;
+  list-type-type: none;
+  margin: 0;
+  padding: 0;
+}
+h1 #menu img {
+  vertical-align: middle;
+  border: none;
+}
+h1 #menu li {
+  display: inline;
+  margin-right: 1em;
 }
 
 h3 {
@@ -62,14 +74,13 @@ form .long_field, form textarea {
   width: 60%;
 }
 
-#issues, #issue, #filter, #new, #new_issue, #log {
+#issues, #issue, #filter, #new, #log, #entry {
   width: 80%;
   margin: 1em auto;
   padding: 0;
 }
 
 #new {
-  display: none;
   background-color: white;
   padding: 0.5em 0.75em;
 }
@@ -128,69 +139,79 @@ form .long_field, form textarea {
 }
 
 #log {
-  list-style-type: none;
+  background-color: white;
+  padding: 0.5em 0.75em;
 }
-#log .entry {
+#log h2 {
+  font-size: 1.2em;
+  margin: 0;
+  border-bottom: 1px solid #888;
+}
+#log #entries {
+  list-style-type: none;
+  padding: 0;
+}
+#log #entries .entry {
   background-color: white;
   display: block;
   margin: 0 0 2px;
   padding: 0.5em 0.75em;
 }
-#log .entry .title {
+#log #entries .entry .title {
   padding: 0 0.5em 0 0;
 }
-#log .entry .details {
+#log #entries .entry .details {
   margin-top: 0.1em;
   float: right;
   font-size: 0.8em;
   color: #888;
 }
-#log .entry .details .id {
+#log #entries .entry .details .id {
   font-weight: bold;
   padding: 2px 4px;
 }
 
-#issue {
+#issue, #entry {
   background-color: white;
   padding: 0.5em 0.75em;
 }
-#issue h2 {
+#issue h2, #entry h2 {
   font-size: 1.2em;
   margin: 0;
   border-bottom: 1px solid #888;
 }
-#issue .issue_report {
+#issue .issue_report, #issue .entry_report, #entry .issue_report, #entry .entry_report {
   font-size: 0.9em;
   margin: 0;
   padding: 0.25em 0.5em;
   color: #888;
   font-variant: italic;
 }
-#issue .issue_description {
+#issue .issue_description, #issue .entry_description, #entry .issue_description, #entry .entry_description {
   background-color: #efefef;
   padding: 0.5em;
 }
-#issue .issue_description *:first-child {
+#issue .issue_description *:first-child, #issue .entry_description *:first-child, #entry .issue_description *:first-child, #entry .entry_description *:first-child {
   margin-top: 0;
 }
-#issue .issue_description *:last-child {
+#issue .issue_description *:last-child, #issue .entry_description *:last-child, #entry .issue_description *:last-child, #entry .entry_description *:last-child {
   margin-bottom: 0;
 }
-#issue .comment .comment_report {
+#issue .comment .comment_report, #entry .comment .comment_report {
   font-size: 0.9em;
   margin: 0 0 1em;
   padding: 0.25em 0.5em;
   color: #888;
   font-variant: italic;
 }
-#issue .comment .comment_body {
+#issue .comment .comment_body, #entry .comment .comment_body {
   background-color: #efefef;
   padding: 0.5em;
 }
-#issue .comment .comment_body *:first-child {
+#issue .comment .comment_body *:first-child, #entry .comment .comment_body *:first-child {
   margin-top: 0;
 }
-#issue .comment .comment_body *:last-child {
+#issue .comment .comment_body *:last-child, #entry .comment .comment_body *:last-child {
   margin-bottom: 0;
 }
 

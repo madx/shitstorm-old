@@ -15,6 +15,7 @@ a:link, a:visited
     &.cancel
       :color white
       :background-color red
+      :text-decoration none
 
 h1
   :margin 0
@@ -29,11 +30,20 @@ h1
       :color white
       :text-decoration none
 
-  img
+  #menu
+    :font-size 0.5em
     :position absolute
-    :right 0.5em
-    :top 0.5em
-    :cursor pointer
+    :right 1em
+    :top 1em
+    :list-type-type none
+    :margin 0
+    :padding 0
+    img
+      :vertical-align middle
+      :border none
+    li
+      :display inline
+      :margin-right 1em
 
 h3
   :font-size 1.1em
@@ -50,13 +60,12 @@ form
   .long_field, textarea
     :width 60%
 
-#issues, #issue, #filter, #new, #new_issue, #log
+#issues, #issue, #filter, #new, #log, #entry
   :width 80%
   :margin 1em auto
   :padding 0
 
 #new
-  :display none
   :background-color white
   :padding 0.5em 0.75em
   h3
@@ -101,37 +110,45 @@ form
     :background white url('/data/flag_rejected.png') 5px 5px no-repeat
 
 #log
-  :list-style-type none
-  .entry
-    :background-color white
-    :display block
-    :margin 0 0 2px
-    :padding 0.5em 0.75em
-    .title
-      :padding 0 0.5em 0 0
-    .details
-      :margin-top 0.1em
-      :float right
-      :font-size 0.8em
-      :color #888
-      .id
-        :font-weight bold
-        :padding 2px 4px
-
-#issue
   :background-color white
   :padding 0.5em 0.75em
   h2
     :font-size 1.2em
     :margin 0
     :border-bottom 1px solid #888
-  .issue_report
+  #entries
+    :list-style-type none
+    :padding 0
+    .entry
+      :background-color white
+      :display block
+      :margin 0 0 2px
+      :padding 0.5em 0.75em
+      .title
+        :padding 0 0.5em 0 0
+      .details
+        :margin-top 0.1em
+        :float right
+        :font-size 0.8em
+        :color #888
+        .id
+          :font-weight bold
+          :padding 2px 4px
+
+#issue, #entry
+  :background-color white
+  :padding 0.5em 0.75em
+  h2
+    :font-size 1.2em
+    :margin 0
+    :border-bottom 1px solid #888
+  .issue_report, .entry_report
     :font-size 0.9em
     :margin 0
     :padding 0.25em 0.5em
     :color #888
     :font-variant italic
-  .issue_description
+  .issue_description, .entry_description
     :background-color #efefef
     :padding 0.5em
     *:first-child
