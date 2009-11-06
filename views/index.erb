@@ -1,9 +1,9 @@
-<div id="filter">
-  <form action="/" method="get">
+<form action="/" method="get">
+  <div id="filter">
     <input type="text" name="q" value="<%= params[:q] %>" />
     <input type="submit" value="<%= dict[:search] %>" />
-  </form>
-</div>
+  </div>
+</form>
 
 <ul id="issues">
   <% @issues.each do |issue| %>

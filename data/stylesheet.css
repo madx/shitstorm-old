@@ -27,7 +27,6 @@ h1 {
   padding: 0.25em 0.5em;
   background-color: black;
   color: white;
-  position: relative;
 }
 h1 a:link, h1 a:visited {
   color: white;
@@ -37,8 +36,8 @@ h1 a:link:hover, h1 a:link:focus, h1 a:link:active, h1 a:visited:hover, h1 a:vis
   color: white;
   text-decoration: none;
 }
-h1 #menu {
-  font-size: 0.5em;
+
+#menu {
   position: absolute;
   right: 1em;
   top: 1em;
@@ -46,11 +45,11 @@ h1 #menu {
   margin: 0;
   padding: 0;
 }
-h1 #menu img {
+#menu img {
   vertical-align: middle;
   border: none;
 }
-h1 #menu li {
+#menu li {
   display: inline;
   margin-right: 1em;
 }
