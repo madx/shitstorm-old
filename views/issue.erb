@@ -20,7 +20,7 @@
   <h3><%= dict[:comments] %></h3>
 
   <% if @issue.comments.empty? %>
-    <p>No comments yet</p>
+    <p><%= dict[:no_comments] %></p>
   <% else %>
   <% @issue.comments.each do |comment| %>
   <div class="comment">

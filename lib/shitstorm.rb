@@ -156,7 +156,10 @@ module ShitStorm
       entry.destroy
 
       Entry.create do |entry|
-        entry.title = App.dict[:log_status] % [author, id, status]
+        entry.title = App.dict[:log_status] % [
+          author, id,
+          App.dict[status.to_sym]
+        ]
         entry.ctime = Time.now
         entry.url   = url
         entry.body  = body

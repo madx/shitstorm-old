@@ -1,7 +1,6 @@
 :add_comment: "Add a comment"
 :add_issue: "Add an issue"
 :anonymous: "anonymous"
-:any: "Any"
 :author: "Author"
 :by: "by"
 :by_link: '<a href="/?q=by:%s" title="View issues from %s">%s</a>'
@@ -21,6 +20,7 @@
 :log_status: "%s changed issue %s status to %s"
 :new_issue: "New issue"
 :new_entry: "New entry"
+:no_comments: "No comments yet."
 :open: "Open"
 :pending: "Pending"
 :posted_on: "Posted on %s"
