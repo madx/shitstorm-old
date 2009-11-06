@@ -2,6 +2,8 @@ require 'yaml'
 require 'sinatra'
 require 'sequel'
 
+require File.join(File.dirname(__FILE__), 'markup')
+
 module ShitStorm
   DB = Sequel.connect "sqlite://shitstorm.db"
 
@@ -30,7 +32,15 @@ module ShitStorm
       end
 
       def author_field
-        '<input type="text" name="author" value="%s" />' % request.cookies["author"]
+        '<input type="text" name="author" value="%s" />' %
+          request.cookies["author"]
+      end
+
+      def set_author_cookie!
+        unless params[:author].empty?
+          response.set_cookie("author", params[:author])
+        end
+        params[:author] = dict[:anonymous] if params[:author].empty?
       end
 
       def option_tag(status, issue_status)
@@ -39,43 +49,6 @@ module ShitStorm
           status, dict[status]
         ]
       end
-
-      def to_filter(query)
-        query.split(/ +/).map { |chunk|
-          case chunk
-            when /^by:(.+)/
-              {:author => $~[1]}
-            when /^is:(.+)/
-              {:status => $~[1]}
-            else
-              :title.like("%#{chunk}%")
-          end
-        }.inject(:ctime) {|f,e| e & f }
-      end
-    end
-
-    get '/' do
-      @issues = (params[:q] ?
-        Issue.filter(to_filter(params[:q])) : Issue
-      ).order(:ctime.desc)
-
-      p @issues.sql
-
-      erb :index
-    end
-
-    post '/' do
-      halt 500 if params[:title].empty?
-      params.merge!({:ctime => Time.now, :status => "open"})
-
-      unless params[:author].empty?
-        response.set_cookie("author", params[:author]) 
-      end
-      params[:author] = dict[:anonymous] if params[:author].empty?
-
-      Issue.create(params)
-
-      redirect '/'
     end
 
     get '/data/:file' do
@@ -85,6 +58,12 @@ module ShitStorm
       File.read(File.join('data', params[:file]))
     end
 
+    get '/' do
+      @issues = Issue.search(params[:q])
+
+      erb :index
+    end
+
     get '/:id' do
       @issue = Issue[params[:id]]
       raise NotFound unless @issue
@@ -92,26 +71,26 @@ module ShitStorm
       erb :show
     end
 
+    post '/' do
+      halt 500 if params[:title].empty?
+      set_author_cookie!
+
+      Issue.create(params.merge({:ctime => Time.now, :status => "open"}))
+
+      redirect '/'
+    end
+
     put '/:id' do
       halt 500 if params[:body].empty?
+      set_author_cookie!
 
-      unless params[:author].empty?
-        response.set_cookie("author", params[:author]) 
-      end
-      params[:author] = dict[:anonymous] if params[:author].empty?
+      raise NotFound unless issue = Issue[params[:id]]
 
-      issue = Issue[params[:id]]
-      raise NotFound unless issue
-
-      comment_params = params.reject { |k,v|
+      comment = Comment.create(params.reject { |k,v|
         !%w(author body).member?(k)
-      }.update({:issue_id => params[:id], :ctime => Time.now})
+      }.update({:issue_id => params[:id], :ctime => Time.now}))
 
-      comment = Comment.create(comment_params)
-      if issue.status != params[:status]
-        issue.status = params[:status]
-        issue.save
-      end
+      issue.update(:status => params[:status])
 
       redirect issue.url
     end
@@ -124,10 +103,35 @@ module ShitStorm
     def url
       "/#{id}"
     end
+
+    def before_create
+      super
+      @values[:description] = Markup.new(description).to_html
+    end
+
+    def self.search(query)
+      return Issue.order(:ctime.desc) unless query
+
+      filter(query.split(/ +/).map { |chunk|
+        case chunk
+          when /^by:(.+)/
+            {:author => $~[1]}
+          when /^is:(.+)/
+            {:status => $~[1]}
+          else
+            :title.like("%#{chunk}%")
+        end
+      }.inject(:ctime) {|f,e| e & f }).order(:ctime.desc)
+    end
   end
 
   class Comment < Sequel::Model
     many_to_one :issues
+
+    def before_create
+      super
+      @values[:body] = Markup.new(body).to_html
+    end
 
     def issue
       Issue[:id => issue_id]

@@ -105,10 +105,6 @@ form .long_field, form textarea {
   margin: 0 0 2px;
   padding: 0.5em 0.75em 0.5em 30px;
 }
-#issues .issue .id {
-  font-weight: bold;
-  padding: 2px 4px;
-}
 #issues .issue .title {
   padding: 0 0.5em 0 0;
 }
@@ -117,6 +113,10 @@ form .long_field, form textarea {
   float: right;
   font-size: 0.8em;
   color: #888;
+}
+#issues .issue .details .id {
+  font-weight: bold;
+  padding: 2px 4px;
 }
 #issues .open {
   background: white url('/data/flag_open.png') 5px 5px no-repeat;
@@ -151,6 +151,12 @@ form .long_field, form textarea {
   background-color: #efefef;
   padding: 0.5em;
 }
+#issue .issue_description *:first-child {
+  margin-top: 0;
+}
+#issue .issue_description *:last-child {
+  margin-bottom: 0;
+}
 #issue .comment .comment_report {
   font-size: 0.9em;
   margin: 0 0 1em;
@@ -161,6 +167,12 @@ form .long_field, form textarea {
 #issue .comment .comment_body {
   background-color: #efefef;
   padding: 0.5em;
+}
+#issue .comment .comment_body *:first-child {
+  margin-top: 0;
+}
+#issue .comment .comment_body *:last-child {
+  margin-bottom: 0;
 }
 
 #footer {
