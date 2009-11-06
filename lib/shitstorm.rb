@@ -118,10 +118,12 @@ module ShitStorm
             {:author => $~[1]}
           when /^is:(.+)/
             {:status => $~[1]}
+          when /^with:(.+)/
+            {:id => Comment.select(:issue_id).filter(:author => $~[1])}
           else
             :title.like("%#{chunk}%")
         end
-      }.inject(:ctime) {|f,e| e & f }).order(:ctime.desc)
+      }.inject {|f,e| e & f }).order(:ctime.desc)
     end
   end
 
