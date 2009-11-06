@@ -131,7 +131,7 @@ module ShitStorm
       Entry.create do |entry|
         entry.title = App.dict[:log_status] % [author, id, status]
         entry.ctime = Time.now
-        entry.url   = File.join(App.url, id.to_s)
+        entry.url   = url
         entry.body  = App.dict[:log_status] % [author, id, status]
       end
     end
@@ -140,7 +140,7 @@ module ShitStorm
       Entry.create do |entry|
         entry.title = App.dict[:log_issue] % [author, id]
         entry.ctime = Time.now
-        entry.url   = File.join(App.url, id.to_s)
+        entry.url   = url
         entry.body  = description
       end
     end
@@ -175,7 +175,7 @@ module ShitStorm
       Entry.create do |entry|
         entry.title = App.dict[:log_comment] % [author, issue_id]
         entry.ctime = Time.now
-        entry.url   = File.join(App.url, issue_id.to_s)
+        entry.url   = issue.url
         entry.body = body
       end
     end

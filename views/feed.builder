@@ -7,7 +7,7 @@ author = lambda {
 xml.instruct! :xml, :version => "1.0"
 xml.feed :xmlns => "http://www.w3.org/2005/Atom" do
   xml.id ShitStorm::App.url
-  xml.title dict[:log] % ShitStorm::App.name
+  xml.title dict[:log_name] % ShitStorm::App.name
   if @entries.first
     xml.updated @entries.first.ctime.xmlschema
   else

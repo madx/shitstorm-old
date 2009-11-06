@@ -50,7 +50,7 @@ form
   .long_field, textarea
     :width 60%
 
-#issues, #issue, #filter, #new, #new_issue
+#issues, #issue, #filter, #new, #new_issue, #log
   :width 80%
   :margin 1em auto
   :padding 0
@@ -76,13 +76,11 @@ form
 
 #issues
   :list-style-type none
-
   .issue
     :background-color white
     :display block
     :margin 0 0 2px
     :padding 0.5em 0.75em 0.5em 30px
-
     .title
       :padding 0 0.5em 0 0
     .details
@@ -93,7 +91,6 @@ form
       .id
         :font-weight bold
         :padding 2px 4px
-
   .open
     :background white url('/data/flag_open.png') 5px 5px no-repeat
   .closed
@@ -102,6 +99,24 @@ form
     :background white url('/data/flag_pending.png') 5px 5px no-repeat
   .rejected
     :background white url('/data/flag_rejected.png') 5px 5px no-repeat
+
+#log
+  :list-style-type none
+  .entry
+    :background-color white
+    :display block
+    :margin 0 0 2px
+    :padding 0.5em 0.75em
+    .title
+      :padding 0 0.5em 0 0
+    .details
+      :margin-top 0.1em
+      :float right
+      :font-size 0.8em
+      :color #888
+      .id
+        :font-weight bold
+        :padding 2px 4px
 
 #issue
   :background-color white

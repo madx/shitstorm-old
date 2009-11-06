@@ -62,7 +62,7 @@ form .long_field, form textarea {
   width: 60%;
 }
 
-#issues, #issue, #filter, #new, #new_issue {
+#issues, #issue, #filter, #new, #new_issue, #log {
   width: 80%;
   margin: 1em auto;
   padding: 0;
@@ -125,6 +125,29 @@ form .long_field, form textarea {
 }
 #issues .rejected {
   background: white url('/data/flag_rejected.png') 5px 5px no-repeat;
+}
+
+#log {
+  list-style-type: none;
+}
+#log .entry {
+  background-color: white;
+  display: block;
+  margin: 0 0 2px;
+  padding: 0.5em 0.75em;
+}
+#log .entry .title {
+  padding: 0 0.5em 0 0;
+}
+#log .entry .details {
+  margin-top: 0.1em;
+  float: right;
+  font-size: 0.8em;
+  color: #888;
+}
+#log .entry .details .id {
+  font-weight: bold;
+  padding: 2px 4px;
 }
 
 #issue {

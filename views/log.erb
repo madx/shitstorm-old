@@ -1,5 +1,15 @@
 <ul id="log">
 <% @entries.each do |entry| %>
-<li><%= entry.title %></li>
+  <li class="entry">
+    <span class="details">
+      <span class="id">#<%= entry.id %></span>
+      <span class="ctime"><%= entry.ctime.strftime("%F %R") %></span>
+    </span>
+    <span class="title">
+      <a href="<%= entry.url %>" title="<%= dict[:view_entry] %>"><%=
+        entry.title
+      %></a>
+    </span>
+  </li>
 <% end %>
 </ul>
