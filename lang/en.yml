@@ -22,6 +22,8 @@
 :new_issue: "New issue"
 :new_entry: "New entry"
 :no_comments: "No comments yet."
+:not_found: "Not found"
+:not_found_blurb: "The page you requested could not be found."
 :open: "Open"
 :or: "or"
 :pending: "Pending"

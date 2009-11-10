@@ -1,0 +1,14 @@
+<form action="/" method="get">
+  <div id="filter">
+    <input type="text" name="q" value="<%= params[:q] %>" />
+    <input type="submit" value="<%= dict[:search] %>" />
+  </div>
+</form>
+
+<div id="error">
+  <h2><%= dict[:not_found] %></h2>
+
+  <p>
+    <%= dict[:not_found_blurb] %>
+  </p>
+</div>

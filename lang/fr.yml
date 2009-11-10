@@ -22,6 +22,8 @@
 :new_issue: "Nouvelle requête"
 :new_entry: "Nouvelle entrée"
 :no_comments: "Pas de commentaires."
+:not_found: "Introuvable"
+:not_found_blurb: "La page que vous avez demandée est introuvable."
 :open: "Ouverte"
 :or: "ou"
 :pending: "En cours"

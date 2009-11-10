@@ -33,6 +33,7 @@ module ShitStorm
       set :email, "admin@example.com"
       set :dict,  Proc.new { YAML.load(File.read("lang/#{lang}.yml")) }
       set :methodoverride, true
+      set :raise_errors, false
     end
 
     helpers do
@@ -150,6 +151,10 @@ module ShitStorm
       end
 
       redirect issue.url
+    end
+
+    error NotFound do
+      erb :not_found
     end
 
   end
