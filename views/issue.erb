@@ -11,7 +11,7 @@
     <%= author_search_link(@issue) %>
   </p>
 
-  <% unless @issue.description.empty? %>
+  <% unless @issue.description.strip.empty? %>
   <div class="issue_description">
     <%= @issue.description %>
   </div>
