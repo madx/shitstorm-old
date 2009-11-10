@@ -26,6 +26,10 @@ module ShitStorm
         ShitStorm::App.dict
       end
 
+      def settings
+        ShitStorm::App
+      end
+
       def author_search_link(issue)
         dict[:by] + " " + dict[:by_link] % [
           Rack::Utils.escape(issue.author),
