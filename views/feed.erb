@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id><%= settings.url %></id>
+  <title><%= dict[:log_name] % settings.name %></title>
+  <% if @entries.first %>
+    <updated><%= @entries.first.ctime.xmlschema %></updated>
+  <% else %>
+    <updated><%= Time.now.xmlschema %></updated>
+  <% end %>
+  <link href="<%= settings.url %>" />
+  <link rel= "self" href="<%= File.join(settings.url, 'feed') %>" />
+  <author>
+    <name>  <%= settings.name  %> </name>
+    <email> <%= settings.email %> </email>
+    <uri>   <%= settings.url   %> </uri>
+  </author>
+
+  <% @entries.each do |entry| %>
+    <entry>
+      <id><%= entry.url %></id>
+      <title type="html"><%= entry.title %></title>
+      <updated><%= entry.ctime.xmlschema %></updated>
+      <author>
+        <name>  <%= settings.name  %> </name>
+        <email> <%= settings.email %> </email>
+        <uri>   <%= settings.url   %> </uri>
+      </author>
+      <link rel="alternate" href="<%= entry.url %>" />
+      <summary type="xhtml">
+        <div xmlns="http://www.w3.org/1999/xhtml">
+          <%= entry.body %>
+        </div>
+      </summary>
+    </entry>
+  <% end %>
+</feed>

@@ -69,7 +69,7 @@ module ShitStorm
 
       @entries = Entry.order(:id.desc).limit(20)
 
-      builder :feed
+      erb :feed, :layout => false
     end
 
     get '/log' do
