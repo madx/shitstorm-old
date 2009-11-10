@@ -34,8 +34,10 @@ module ShitStorm
 
       (split(/\n\n+|(?=^(?:  )*(?:\* |# |=+ ))|^(---.*?^---)|^(\{\{[\w:. -]+)|^(\}\})/m).map { |par|
          case par
-         when /\A---\n(.*)^---/m:     %Q{<pre>#{prefmt $1}</pre>}
-         when /\A\s*\z/:              nil  # ignore
+         when /\A---\n(.*)^---/m
+          %Q{<pre>#{prefmt $1}</pre>}
+         when /\A\s*\z/
+          nil  # ignore
          when /\A((?:  )*)((?:\* |# |" |)?)(.*)/m  #/
            indent, type, text = $1, $2.strip, $3
 
@@ -64,24 +66,33 @@ module ShitStorm
 
            if fresh
              case type
-             when '*':  to_close.unshift %Q{</li></ul>}
-             when '#':  to_close.unshift %Q{</li></ol>}
-             when '"':  to_close.unshift %Q{</blockquote>}
+             when '*'
+              to_close.unshift %Q{</li></ul>}
+             when '#'
+              to_close.unshift %Q{</li></ol>}
+             when '"'
+              to_close.unshift %Q{</blockquote>}
              end
            end
 
            case type
-           when '*':        text = "<li>" + text
-           when '#':        text = "<li>" + text
-           when /\A(=+)\z/: text = "<h#{$1.size}>#{text}</h#{$1.size}>"
+           when '*'
+            text = "<li>" + text
+           when '#'
+            text = "<li>" + text
+           when /\A(=+)\z/
+            text = "<h#{$1.size}>#{text}</h#{$1.size}>"
            end
 
            text.gsub!(/\A<(\w+)>/, %Q{<\\1 id="#{id}">})  if id
 
            case type
-           when '*':  text = (fresh ? "<ul>"         : "</li>") + text
-           when '#':  text = (fresh ? "<ol>"         : "</li>") + text
-           when '"':  text = (fresh ? "<blockquote>" : ""     ) + text
+           when '*'
+            text = (fresh ? "<ul>"         : "</li>") + text
+           when '#'
+            text = (fresh ? "<ol>"         : "</li>") + text
+           when '"'
+            text = (fresh ? "<blockquote>" : ""     ) + text
            end
 
            depth = new_depth
