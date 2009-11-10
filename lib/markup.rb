@@ -32,7 +32,7 @@ module ShitStorm
       last = ""
       gsub!("\r\n", "\n")
 
-      (split(/\n\n+|(?=^(?:  )*(?:\* |# |=+ ))|^(---.*?^---)|^(\{\{[\w:. -]+)|^(\}\})/m).map { |par|
+      (split(/\n\n+|(?:\* |# |=+ )|^(---.*?^---)/m).map { |par|
          case par
          when /\A---\n(.*)^---/m
           %Q{<pre>#{prefmt $1}</pre>}
@@ -46,11 +46,7 @@ module ShitStorm
            end
 
            new_depth = indent.size/2
-           new_depth += 1  unless type.empty? || type =~ /\A(=+)\z/
-
-           if text =~ /^#([A-Za-z][\w:.-]*) /  #/
-             id, text = $1, $'
-           end
+           new_depth += 1  unless type.empty?
 
            text = pfmt text
            text = "<p>#{text}</p>"  unless type =~ /\*|#|"/ || text.empty?  #/
@@ -80,11 +76,7 @@ module ShitStorm
             text = "<li>" + text
            when '#'
             text = "<li>" + text
-           when /\A(=+)\z/
-            text = "<h#{$1.size}>#{text}</h#{$1.size}>"
            end
-
-           text.gsub!(/\A<(\w+)>/, %Q{<\\1 id="#{id}">})  if id
 
            case type
            when '*'
