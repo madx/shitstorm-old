@@ -12,6 +12,7 @@ module ShitStorm
         gsub(/(`+)(.*?)\1/m,            '<code>\2</code>').
         gsub(/\*(.*?)\*/m,              '<strong>\1</strong>').
         gsub(/_(.*?)_/m,                '<em>\1</em>').
+        gsub(/#(\d+)/,                  '<a href="/\1">#\1</a>').
         gsub(/\[(\S+)\]/m,              '<a href="\1">\1</a>').
         gsub(/\[(.*?)\s?(\S+)\]/m,      '<a href="\2">\1</a>').
         gsub(/&MarkupEscape(\d+);/) { $1.to_i.chr }.
