@@ -15,7 +15,6 @@ if RUBY_VERSION >= '1.9'
   end
 
   Sequel::Model.plugin :force_encoding, 'UTF-8'
-  
 end
 
 module ShitStorm
@@ -191,6 +190,7 @@ module ShitStorm
 
     def after_create
       super
+
       Entry.create do |entry|
         entry.title = App.dict[:log_issue] % [author, id]
         entry.ctime = Time.now
@@ -222,11 +222,13 @@ module ShitStorm
 
     def before_create
       super
+
       @values[:body] = Markup.new(body).to_html
     end
 
     def after_create
       super
+
       Entry.create do |entry|
         entry.title = App.dict[:log_comment] % [author, issue_id]
         entry.ctime = Time.now
