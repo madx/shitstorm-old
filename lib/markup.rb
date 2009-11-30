@@ -8,7 +8,7 @@ module ShitStorm
         gsub("<", "&lt;").
         gsub(">", "&gt;").
         gsub('"', "&quot;").
-        gsub(/\\\\$/, '<br>').
+        gsub(/\\\\$/, '<br />').
         gsub(/(`+)(.*?)\1/m,            '<code>\2</code>').
         gsub(/\*(.*?)\*/m,              '<strong>\1</strong>').
         gsub(/_(.*?)_/m,                '<em>\1</em>').
