@@ -22,6 +22,8 @@ module ShitStorm
 
   class NotFound < StandardError; end
 
+  # == App ==
+
   class App < Sinatra::Base
 
     configure do
@@ -78,23 +80,13 @@ module ShitStorm
       send_file(File.join('data', params[:file]))
     end
 
-    get '/feed' do
-      content_type 'application/atom+xml'
+    # get '/feed' do
+    #   content_type 'application/atom+xml'
 
-      @entries = Entry.order(:id.desc).limit(20)
+    #   @entries = Entry.order(:id.desc).limit(20)
 
-      erb :feed, :layout => false
-    end
-
-    get '/log' do
-      @entries = Entry.order(:id.desc)
-
-      erb :log
-    end
-
-    get '/add' do
-      erb :add
-    end
+    #   erb :feed, :layout => false
+    # end
 
     get '/' do
       @issues = Issue.search(params[:q])
@@ -107,6 +99,16 @@ module ShitStorm
       raise NotFound unless @entry
 
       erb :entry
+    end
+
+    get '/log' do
+      @entries = Entry.order(:id.desc)
+
+      erb :log
+    end
+
+    get '/add' do
+      erb :add
     end
 
     get '/:id' do
@@ -127,13 +129,14 @@ module ShitStorm
 
     post '/log' do
       halt 500 if params[:title].empty?
+      set_author_cookie!
 
       Entry.create(params.merge({:ctime => Time.now}))
 
       redirect '/log'
     end
 
-    put '/:id' do
+    post '/:id/comment' do
       halt 500 if params[:body].empty?
       set_author_cookie!
 
@@ -145,11 +148,22 @@ module ShitStorm
 
       Comment.create(data)
 
-      if params[:status] != issue.status
-        issue.update(:status => params[:status])
-      end
-
       redirect issue.url
+    end
+
+    post '/log/:id/comment' do
+      halt 500 if params[:body].empty?
+      set_author_cookie!
+
+      raise NotFound unless entry = Entry[params[:id]]
+
+      data = params.reject { |k,v|
+        !%w(author body).member?(k)
+      }.update({:entry_id => params[:id], :ctime => Time.now})
+
+      Comment.create(data)
+
+      redirect entry.url
     end
 
     error NotFound do
@@ -157,6 +171,8 @@ module ShitStorm
     end
 
   end
+
+  # == Models ==
 
   class Issue < Sequel::Model
     one_to_many :comments
@@ -167,36 +183,7 @@ module ShitStorm
 
     def before_create
       super
-      @values[:description] = Markup.new(description).to_html
-    end
-
-    def after_update
-      super
-
-      entry = Entry.order(:id).last
-      body  = entry.body
-      entry.destroy
-
-      Entry.create do |entry|
-        entry.title = App.dict[:log_status] % [
-          author, id,
-          App.dict[status.to_sym]
-        ]
-        entry.ctime = Time.now
-        entry.url   = url
-        entry.body  = body
-      end
-    end
-
-    def after_create
-      super
-
-      Entry.create do |entry|
-        entry.title = App.dict[:log_issue] % [author, id]
-        entry.ctime = Time.now
-        entry.url   = url
-        entry.body  = description
-      end
+      @values[:body] = Markup.new(body).to_html
     end
 
     def self.search(query)
@@ -217,31 +204,36 @@ module ShitStorm
     end
   end
 
-  class Comment < Sequel::Model
-    many_to_one :issues
+
+  class Entry < Sequel::Model
+    one_to_many :comments
+
+    def url
+      "/log/#{id}"
+    end
 
     def before_create
       super
-
       @values[:body] = Markup.new(body).to_html
     end
+  end
 
-    def after_create
+
+  class Comment < Sequel::Model
+    many_to_one :issues
+    many_to_one :entries
+
+    def before_create
       super
-
-      Entry.create do |entry|
-        entry.title = App.dict[:log_comment] % [author, issue_id]
-        entry.ctime = Time.now
-        entry.url   = issue.url
-        entry.body = body
-      end
+      @values[:body] = Markup.new(body).to_html
     end
 
     def issue
       Issue[:id => issue_id]
     end
-  end
 
-  class Entry < Sequel::Model
+    def entry
+      Entry[:id => entry_id]
+    end
   end
 end
