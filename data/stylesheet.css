@@ -22,6 +22,10 @@ a:link:hover.cancel, a:link:focus.cancel, a:link:active.cancel, a:visited:hover.
   text-decoration: none;
 }
 
+img {
+  vertical-align: middle;
+}
+
 h1 {
   margin: 0;
   padding: 0.25em 0.5em;
@@ -110,13 +114,15 @@ form .long_field, form textarea {
   display: block;
   margin: 0 0 2px;
   padding: 0.5em 0.75em 0.5em 30px;
+  position: relative;
 }
 #issues .issue .title {
   padding: 0 0.5em 0 0;
 }
 #issues .issue .details {
-  margin-top: 0.1em;
-  float: right;
+  position: absolute;
+  top: 0.6em;
+  right: 0.6em;
   font-size: 0.8em;
   color: #888;
 }

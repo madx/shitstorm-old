@@ -2,17 +2,21 @@
   <h2><%= dict[:log] %></h2>
   <ul id="entries">
   <% @entries.each do |entry| %>
-    <li class="entry">
-      <span class="details">
-        <span class="id">#<%= entry.id %></span>
-        <span class="ctime"><%= entry.ctime.strftime("%F %R") %></span>
+  <li class="entry">
+    <span class="details">
+      <span class="id">#<%= entry.id %></span>
+      <span class="comment_count">(<%= entry.comments.length %>)</span>
+      <span class="ctime"><%= entry.ctime.strftime("%F %R") %></span>
+      <span class="author">
+        <%= author_search_link(entry) %>
       </span>
-      <span class="title">
-        <a href="/log/<%= entry.id %>" title="<%= dict[:view_entry] %>"><%=
-          entry.title
-        %></a>
-      </span>
-    </li>
+    </span>
+    <span class="title">
+      <a href="/log/<%= entry.id %>" title="<%= dict[:view_entry] %>"><%=
+        entry.title
+      %></a>
+    </span>
+  </li>
   <% end %>
   </ul>
 
@@ -20,12 +24,12 @@
   <div id="new_comment">
     <form action="/log" method="post">
       <p>
-        <label for="title"><%= dict[:title] %></label>
-        <input type="text" name="title" class="long_field" />
+        <label for="author"><%= dict[:author] %></label>
+        <%= author_field %>
       </p>
       <p>
-        <label for="url"><%= dict[:link] %></label>
-        <input type="text" name="url" class="long_field" />
+        <label for="title"><%= dict[:title] %></label>
+        <input type="text" name="title" class="long_field" />
       </p>
       <p>
         <label for="body"><%= dict[:body] %></label>

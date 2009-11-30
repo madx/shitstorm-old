@@ -11,9 +11,9 @@
     <%= author_search_link(@issue) %>
   </p>
 
-  <% unless @issue.description.strip.empty? %>
-  <div class="issue_description">
-    <%= @issue.description %>
+  <% unless @issue.body.strip.empty? %>
+  <div class="issue_body">
+    <%= @issue.body %>
   </div>
   <% end %>
 
@@ -35,29 +35,15 @@
 
   <h3><%= dict[:add_comment] %></h3>
   <div id="new_comment">
-    <form action="<%= @issue.url %>" method="post">
-      <input type="hidden" name="_method" value="put" />
-
+    <form action="<%= @issue.url %>/comment" method="post">
       <p>
         <label for="author"><%= dict[:author] %></label>
         <%= author_field %>
       </p>
-
       <p>
         <label for="body"><%= dict[:body] %></label>
         <textarea name="body" rows="7" cols="80"></textarea>
       </p>
-
-      <p>
-      <label for="status"><%= dict[:status] %>:</label>
-      <select name="status">
-        <%= option_tag :open, @issue.status %>
-        <%= option_tag :closed, @issue.status %>
-        <%= option_tag :pending, @issue.status %>
-        <%= option_tag :rejected, @issue.status %>
-      </select>
-      </p>
-
       <input type="submit" value="<%= dict[:submit] %>" />
     </form>
   </div>
