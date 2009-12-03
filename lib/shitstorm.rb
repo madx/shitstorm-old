@@ -2,20 +2,7 @@
 require 'yaml'
 require 'sinatra'
 require 'sequel'
-
 require File.join(File.dirname(__FILE__), 'markup')
-
-if RUBY_VERSION >= '1.9'
-  class String
-    alias :old_concat :concat
-    def initialize(string)
-      string.force_encoding('utf-8')
-      old_concat(string)
-    end
-  end
-
-  Sequel::Model.plugin :force_encoding, 'UTF-8'
-end
 
 module ShitStorm
   DB = Sequel.connect "sqlite://shitstorm.db"
