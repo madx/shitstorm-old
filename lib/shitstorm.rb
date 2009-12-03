@@ -1,4 +1,4 @@
-#encoding: utf-8
+#coding: utf-8
 require 'yaml'
 require 'sinatra'
 require 'sequel'
@@ -80,13 +80,13 @@ module ShitStorm
       send_file(File.join('data', params[:file]))
     end
 
-    # get '/feed' do
-    #   content_type 'application/atom+xml'
+    get '/feed' do
+      content_type 'application/atom+xml'
 
-    #   @entries = Entry.order(:id.desc).limit(20)
+      @events = Event.order(:id.desc).limit(20)
 
-    #   erb :feed, :layout => false
-    # end
+      erb :feed, :layout => false
+    end
 
     get '/' do
       @issues = Issue.search(params[:q])
@@ -186,6 +186,11 @@ module ShitStorm
       @values[:body] = Markup.new(body).to_html
     end
 
+    def after_create
+      super
+      Event.issue(self)
+    end
+
     def self.search(query)
       return Issue.order(:id.desc) unless query
 
@@ -204,7 +209,6 @@ module ShitStorm
     end
   end
 
-
   class Entry < Sequel::Model
     one_to_many :comments
 
@@ -215,6 +219,11 @@ module ShitStorm
     def before_create
       super
       @values[:body] = Markup.new(body).to_html
+    end
+
+    def after_create
+      super
+      Event.entry(id)
     end
   end
 
@@ -228,6 +237,15 @@ module ShitStorm
       @values[:body] = Markup.new(body).to_html
     end
 
+    def after_create
+      super
+      if issue_id
+        Event.comment_issue(issue_id)
+      elsif entry_id
+        Event.comment_entry(entry_id)
+      end
+    end
+
     def issue
       Issue[:id => issue_id]
     end
@@ -236,4 +254,31 @@ module ShitStorm
       Entry[:id => entry_id]
     end
   end
+
+  class Event < Sequel::Model
+    def self.issue(issue)
+      create :url => issue.url,
+             :message => "new_issue",
+             :ctime => Time.now
+    end
+
+    def self.entry(id)
+      create :url => "/log/#{id}",
+             :message => "new_entry",
+             :ctime => Time.now
+    end
+
+    def self.comment_issue(id)
+      create :url => "/#{id}",
+             :message => "comment_on_issue",
+             :ctime => Time.now
+    end
+
+    def self.comment_entry(id)
+      create :url => "/log/#{id}",
+             :message => "comment_on_entry",
+             :ctime => Time.now
+    end
+  end
+
 end

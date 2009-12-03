@@ -18,12 +18,12 @@
 
 <ul id="menu">
   <li>
-    <a href="/add" title="<%= dict[:add_issue] %>" id="add_issue_lnk"><img
-       src="/data/add.png" alt="<%= dict[:issue] %>" /></a>
+    <a href="/add" title="<%= dict[:add_issue] %>" 
+       id="add_issue_lnk"><%= dict[:issues] %></a>
   </li>
   <li>
-    <a href="/log" title="<%= dict[:view_log] %>" id="log_link"><img
-       src="/data/log.png" alt="<%= dict[:log] %>" /></a>
+    <a href="/log" title="<%= dict[:view_log] %>" 
+       id="log_link"><%= dict[:log] %></a>
   </li>
 </ul>
 
@@ -34,9 +34,6 @@
   <a href="http://garbure.info/shitstorm/"
      title="ShitStorm's website">ShitStorm</a>
 </p>
-
-<script type="text/javascript" charset="utf-8" src="data/jquery.js"></script>
-<script type="text/javascript" charset="utf-8" src="data/app.js"></script>
 </body>
 
 </html>
