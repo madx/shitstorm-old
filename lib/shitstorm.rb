@@ -53,6 +53,14 @@ module ShitStorm
         params[:author] = dict[:anonymous] if params[:author].empty?
       end
 
+      def halt_unless_param(p)
+        halt 500 if params[p].empty?
+      end
+
+      def find(klass)
+        klass[params[:id]] or raise NotFound
+      end
+
       def option_tag(status, issue_status)
         '<option%s value="%s">%s</option>' % [
           status.to_s == issue_status ? ' selected="selected"' : '',
@@ -82,8 +90,7 @@ module ShitStorm
     end
 
     get '/log/:id' do
-      @entry = Entry[params[:id]]
-      raise NotFound unless @entry
+      @entry = find(Entry)
 
       erb :entry
     end
@@ -99,14 +106,13 @@ module ShitStorm
     end
 
     get '/:id' do
-      @issue = Issue[params[:id]]
-      raise NotFound unless @issue
+      @issue = find(Issue)
 
       erb :issue
     end
 
     post '/' do
-      halt 500 if params[:title].empty?
+      halt_unless_param :title
       set_author_cookie!
 
       Issue.create(params.merge({:ctime => Time.now, :status => "open"}))
@@ -115,7 +121,7 @@ module ShitStorm
     end
 
     post '/log' do
-      halt 500 if params[:title].empty?
+      halt_unless_param :title
       set_author_cookie!
 
       Entry.create(params.merge({:ctime => Time.now}))
@@ -124,10 +130,10 @@ module ShitStorm
     end
 
     post '/:id/comment' do
-      halt 500 if params[:body].empty?
+      halt_unless_param :body
       set_author_cookie!
 
-      raise NotFound unless issue = Issue[params[:id]]
+      issue = find(Issue)
 
       data = params.reject { |k,v|
         !%w(author body).member?(k)
@@ -139,10 +145,10 @@ module ShitStorm
     end
 
     post '/log/:id/comment' do
-      halt 500 if params[:body].empty?
+      halt_unless_param :body
       set_author_cookie!
 
-      raise NotFound unless entry = Entry[params[:id]]
+      entry = find(Entry)
 
       data = params.reject { |k,v|
         !%w(author body).member?(k)
