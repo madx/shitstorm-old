@@ -33,6 +33,7 @@ enforcing a few conventions:
 ## Install ###################################################################
 
     $ git clone git://github.com/madx/shitstorm.git
+    $ cd shitstorm && sequel -m migrations/ sqlite://shitstorm.db
 
 Copy the files where you want to install it, then edit `config.ru` if you
 want to change the defaults. Use plain ruby to do the configuration, like
