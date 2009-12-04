@@ -181,7 +181,7 @@ module ShitStorm
 
     def after_create
       super
-      Event.issue(self)
+      Event.create(:new_issue, self)
     end
 
     def self.search(query)
@@ -216,7 +216,7 @@ module ShitStorm
 
     def after_create
       super
-      Event.entry(self)
+      Event.create(:new_entry, self)
     end
   end
 
@@ -233,9 +233,9 @@ module ShitStorm
     def after_create
       super
       if issue_id
-        Event.comment_issue(Issue[issue_id])
+        Event.create(:issue_comment, Issue[issue_id])
       elsif entry_id
-        Event.comment_entry(Entry[entry_id])
+        Event.create(:entry_comment, Entry[entry_id])
       end
     end
 
@@ -249,32 +249,12 @@ module ShitStorm
   end
 
   class Event < Sequel::Model
-    def self.issue(issue)
-      create :url => issue.url,
-             :message => App.dict[:event]["new_issue"] %
-               [issue.author, issue.id],
-             :ctime => Time.now
-    end
-
-    def self.entry(entry)
-      create :url => entry.url,
-             :message => App.dict[:event]["new_entry"] %
-               [entry.author, entry.id],
-             :ctime => Time.now
-    end
-
-    def self.comment_issue(issue)
-      create :url => issue.url,
-             :message => App.dict[:event]["issue_comment"] %
-               [issue.author, issue.id],
-             :ctime => Time.now
-    end
-
-    def self.comment_entry(entry)
-      create :url => entry.url,
-             :message => App.dict[:event]["entry_comment"] %
-               [entry.author, entry.id],
-             :ctime => Time.now
+    def self.create(mode, obj)
+      super({
+        :url => obj.url,
+        :message => App.dict[:event][mode] % [obj.author, obj.id],
+        :ctime => Time.now
+      })
     end
   end
 
