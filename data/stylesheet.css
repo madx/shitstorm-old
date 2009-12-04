@@ -14,12 +14,10 @@ a:link.hashtag, a:visited.hashtag {
   -webkit-border-radius: 3px;
   border-radius: 3px;
   margin-left: 5px;
-  margin-right: 5px;
   padding: 2px;
-  font-size: 0.9em;
+  font-size: 0.8em;
   border: 1px solid #A4A4A4;
   background-color: #D8D8D8;
-  font-weight: normal;
 }
 a:link.cancel, a:visited.cancel {
   color: red;
@@ -125,11 +123,11 @@ form .long_field, form textarea {
   background-color: white;
   display: block;
   margin: 0 0 2px;
-  padding: 0.5em 0.75em 0.5em 30px;
   position: relative;
+  padding: 0.5em 0.75em 0.5em 5px;
 }
 #issues .issue .title {
-  padding: 0 0.5em 0 0;
+  padding: 0 0.5em 0 0.5em;
 }
 #issues .issue .details {
   position: absolute;
@@ -142,20 +140,11 @@ form .long_field, form textarea {
   font-weight: bold;
   padding: 2px 4px;
 }
-#issues .open {
-  background: white url('/data/flag_open.png') 5px 5px no-repeat;
-}
-#issues .open .title a {
+#issues .open .title a.title {
   font-weight: bold;
 }
-#issues .closed {
-  background: white url('/data/flag_closed.png') 5px 5px no-repeat;
-}
-#issues .pending {
-  background: white url('/data/flag_pending.png') 5px 5px no-repeat;
-}
-#issues .rejected {
-  background: white url('/data/flag_rejected.png') 5px 5px no-repeat;
+#issues .closed, #issues .rejected {
+  opacity: 0.7;
 }
 
 #log {
@@ -209,6 +198,7 @@ form .long_field, form textarea {
 #issue h2, #entry h2 {
   font-size: 1.2em;
   margin: 0;
+  padding-bottom: 3px;
   border-bottom: 1px solid #888;
 }
 #issue .issue_report, #issue .entry_report, #entry .issue_report, #entry .entry_report {

@@ -8,6 +8,7 @@
 <ul id="issues">
   <% @issues.each do |issue| %>
   <li class="issue <%= issue.status %>">
+    <a href="/?q=is:<%= issue.status %>" title="<%= dict[:see_status] % dict[issue.status.to_sym] %>"><img src="/data/flag_<%= dict[issue.status.to_sym] %>.png" alt="<%= dict[issue.status.to_sym] %>" /></a>
     <span class="title">
       <a href="<%= issue.url %>" title="<%= dict[:view_issue] %>"><%=
         issue.title_without_hashtags

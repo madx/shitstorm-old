@@ -42,3 +42,5 @@
 :title: "Titre"
 :view_issue: "Voir cette requête"
 :view_log: "Voir le journal"
+:see_tag: "Voir toutes les requêtes avec le tag %s"
+:see_status: "Voir toutes les requêtes %s"

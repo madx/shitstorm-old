@@ -1,8 +1,6 @@
 <div id="issue">
   <h2>
-    <img src="/data/flag_<%= @issue.status %>.png" alt="<%=
-      dict[@issue.status.to_sym]
-    %>" />
+    <a href="/?q=is:<%= @issue.status %>" title="<%= dict[:see_status] % dict[@issue.status.to_sym] %>"><img src="/data/flag_<%= dict[@issue.status.to_sym] %>.png" alt="<%= dict[@issue.status.to_sym] %>" /></a>
     <%= @issue.title_without_hashtags %>
     &nbsp;<% @issue.hashtags.each do |tag| %><a href="/?q=<%= tag.gsub('#', '%23')%>" title="Tag <%= tag %>" class="hashtag"><%= tag %></a>&nbsp;<% end %>
   </h2>
