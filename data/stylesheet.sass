@@ -17,6 +17,7 @@ a:link, a:visited
     :font-size 0.9em
     :border 1px solid #A4A4A4
     :background-color #D8D8D8
+    :font-weight normal
   &.cancel
     :color red
   &:hover, &:focus, &:active
@@ -116,6 +117,8 @@ form
 
   .open
     :background white url('/data/flag_open.png') 5px 5px no-repeat
+    .title a
+      :font-weight bold
   .closed
     :background white url('/data/flag_closed.png') 5px 5px no-repeat
   .pending

@@ -19,6 +19,7 @@ a:link.hashtag, a:visited.hashtag {
   font-size: 0.9em;
   border: 1px solid #A4A4A4;
   background-color: #D8D8D8;
+  font-weight: normal;
 }
 a:link.cancel, a:visited.cancel {
   color: red;
@@ -143,6 +144,9 @@ form .long_field, form textarea {
 }
 #issues .open {
   background: white url('/data/flag_open.png') 5px 5px no-repeat;
+}
+#issues .open .title a {
+  font-weight: bold;
 }
 #issues .closed {
   background: white url('/data/flag_closed.png') 5px 5px no-repeat;
