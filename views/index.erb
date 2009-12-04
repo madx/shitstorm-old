@@ -10,8 +10,8 @@
   <li class="issue <%= issue.status %>">
     <span class="title">
       <a href="<%= issue.url %>" title="<%= dict[:view_issue] %>"><%=
-        issue.title
-      %></a>
+        issue.title_without_hashtags
+      %></a>&nbsp;<% issue.hashtags.each do |tag| %><a href="/?q=<%= tag.gsub('#', '%23')%>" title="Tag <%= tag %>" class="hashtag"><%= tag %></a>&nbsp;<% end %>
     </span>
     <span class="details">
       <span class="id">#<%= issue.id %></span>
