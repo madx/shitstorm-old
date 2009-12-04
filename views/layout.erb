@@ -6,6 +6,7 @@
   <title><%= settings.name %> | ShitStorm</title>
   <link rel="stylesheet" href="/data/stylesheet.css" type="text/css"
         media="screen" charset="utf-8" />
+  <link href="/data/bug.png" rel="shortcut icon" type="image/x-png" />
   <link rel="alternate" type="application/atom+xml" title="<%=
     dict[:log_name] % settings.name %>"
         href="/feed" />
@@ -18,11 +19,11 @@
 
 <ul id="menu">
   <li>
-    <a href="/add" title="<%= dict[:add_issue] %>" 
+    <a href="/add" title="<%= dict[:add_issue] %>"
        id="add_issue_lnk"><%= dict[:add_issue] %></a>
   </li>
   <li>
-    <a href="/log" title="<%= dict[:view_log] %>" 
+    <a href="/log" title="<%= dict[:view_log] %>"
        id="log_link"><%= dict[:log] %></a>
   </li>
 </ul>

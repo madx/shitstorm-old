@@ -89,6 +89,10 @@ module ShitStorm
       erb :index
     end
 
+    get '/favicon.ico' do
+      send_file('data/bug.png')
+    end
+
     get '/log/:id' do
       @entry = find(Entry)
 
