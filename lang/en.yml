@@ -10,6 +10,11 @@
 :body: "Contents"
 :created_on: "Created on %s"
 :description: "Description"
+:event:
+  new_issue: "%s created issue %s"
+  new_entry: "%s posted entry %s"
+  issue_comment: "%s commented on issue %s"
+  entry_comment: "%s commented on entry %s"
 :home: "Return to issues list"
 :issue: "Issue"
 :issues: "Issues"
