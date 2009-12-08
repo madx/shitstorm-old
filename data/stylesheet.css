@@ -34,6 +34,7 @@ a:link:hover.cancel, a:link:focus.cancel, a:link:active.cancel, a:visited:hover.
 
 img {
   vertical-align: middle;
+  border: none;
 }
 
 h1 {

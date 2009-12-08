@@ -45,4 +45,8 @@
 :view_issue: "View this issue"
 :view_log: "View the log"
 :see_tag: "View all issues tagged with %s"
-:see_status: "View all %s issues"
+:see_status:
+  :open: "View all open issues"
+  :closed: "View all closed issues"
+  :pending: "View all pending issues"
+  :rejected: "View all rejected issues"

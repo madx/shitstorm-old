@@ -46,6 +46,15 @@ module ShitStorm
           request.cookies["author"]
       end
 
+      def flag_link(issue)
+        ('<a href="/?q=is:%s" title="%s">'+
+        '<img src="/data/flag_%s.png" alt="%s" />'+
+        '</a>') % [
+          @issue.status, dict[:see_status][@issue.status.to_sym],
+          @issue.status, @issue.status
+        ]
+      end
+
       def set_author_cookie!
         unless params[:author].empty?
           response.set_cookie("author", params[:author])

@@ -45,4 +45,8 @@
 :view_issue: "Voir cette requête"
 :view_log: "Voir le journal"
 :see_tag: "Voir toutes les requêtes avec le tag %s"
-:see_status: "Voir toutes les requêtes %s"
+:see_status:
+  :open: "Voir toutes les requêtes ouvertes"
+  :closed: "Voir toutes les requêtes fermées"
+  :pending: "Voir toutes les requêtes en cours"
+  :rejected: "Voir toutes les requêtes rejetées"
