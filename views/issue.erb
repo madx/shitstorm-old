@@ -3,6 +3,17 @@
     <a href="/?q=is:<%= @issue.status %>" title="<%= dict[:see_status] % dict[@issue.status.to_sym] %>"><img src="/data/flag_<%= dict[@issue.status.to_sym] %>.png" alt="<%= dict[@issue.status.to_sym] %>" /></a>
     <%= @issue.title_without_hashtags %>
     &nbsp;<% @issue.hashtags.each do |tag| %><a href="/?q=<%= tag.gsub('#', '%23')%>" title="Tag <%= tag %>" class="hashtag"><%= tag %></a>&nbsp;<% end %>
+    <div id="status_changer">
+      <form action="/<%= @issue.id %>" method="POST">
+        <select name="status">
+        <% [:open, :pending, :closed, :rejected].each do |status| %>
+          <%= option_tag status, @issue.status %>
+        <% end %>
+        </select>
+        <input type="submit" value="<%= dict[:update] %>" />
+        <input type="hidden" name="_method" value="PUT" />
+      </form>
+    </div>
   </h2>
 
   <p class="issue_report">

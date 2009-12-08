@@ -41,6 +41,7 @@
 :submit: "Submit"
 :timefmt: "%F at %R"
 :title: "Title"
+:update: "Update"
 :view_issue: "View this issue"
 :view_log: "View the log"
 :see_tag: "View all issues tagged with %s"

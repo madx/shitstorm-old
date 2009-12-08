@@ -163,6 +163,18 @@ module ShitStorm
       redirect entry.url
     end
 
+    put '/:id' do
+      halt_unless_param :status
+
+      issue = find(Issue)
+
+      if params[:status] != issue.status
+        issue.update :status => params[:status]
+      end
+
+      redirect issue.url
+    end
+
     error NotFound do
       erb :not_found
     end

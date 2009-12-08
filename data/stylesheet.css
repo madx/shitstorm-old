@@ -200,6 +200,16 @@ form .long_field, form textarea {
   margin: 0;
   padding-bottom: 3px;
   border-bottom: 1px solid #888;
+  position: relative;
+}
+#issue h2 #status_changer, #entry h2 #status_changer {
+  position: absolute;
+  top: -0.1em;
+  right: 0;
+}
+#issue h2 #status_changer form select, #issue h2 #status_changer form input[type=submit], #entry h2 #status_changer form select, #entry h2 #status_changer form input[type=submit] {
+  font-size: 0.9em;
+  margin: -0.25em 0 1em 0;
 }
 #issue .issue_report, #issue .entry_report, #entry .issue_report, #entry .entry_report {
   font-size: 0.9em;
