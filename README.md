@@ -17,11 +17,11 @@ enforcing a few conventions:
   hey, there's a comment form so you can tell someone to take care of it.
 * No categories, tags, milestones, WTF, etc. But a search field that has a few
   smart features.
-* A log which holds information about what has been done. You can also write
-  whatever you want in it freely. This is also available as an Atom feed so
-  you can stay up-to-date.
-* Simple i18n with a YAML file (see lang/). English and french dictionaries
-  are provided.
+* A pseudo blog where everyone can write and comment entries. Works pretty much
+  like issues, except there is no state.
+* An aggregator for the issues and the blog entries available as an ATOM feed.
+* Simple i18n with a YAML file (see lib/shitstorm/lang/). English and french
+  dictionaries are provided.
 
 ## Requirements ##############################################################
 
@@ -49,10 +49,12 @@ this:
       config.set :email, "admin@mydomain.com" # this one isn't
     })
 
+Then run the app with $ rackup -E production config.ru
+
 ## Source ####################################################################
 
 ShitStorm's Git repo is available on GitHub, which can be browsed at
-http://github.com/madx/shitstorm and cloned with:
+<http://github.com/madx/shitstorm> and cloned with:
 
     git clone git://github.com/madx/shitstorm.git
 
@@ -67,13 +69,14 @@ There are special filters in the queries:
 * `is:<status>`: filter issues with a status of `<status>` (can be `open`,
    `closed`, `pending` or `rejected`)
 * `with:<name>`: filter issues where `<name>` has written a comment
+* `#<tag>`: filter issues with a hashtag. Actually this is just a text search,
+  but hashtags are handled by ShitStorm (try it!)
 
-Click on an issue title to view details and comments.
+Click on an issue title to view details and comments. Posting comments is
+dead-simple, so is changing an issue's state (right of the issue's title)
 
-The green plus at the top right of the page is for adding issues, just fill
-the form and click submit.
-
-The little book is to access the logs. There you can write custom log entries.
+The log works pretty much the same way, except it's not (yet) searchable.
+It's accessible by clicking "Log" at the top right
 
 ## Formatting ################################################################
 
@@ -81,7 +84,7 @@ When writing issue descriptions or comments, you have access to a basic
 formatting facility that's based on Christian Neukirchen's Challis, but
 simplified.
 
-Help about Challis is available at http://github.com/chneukirchen/challis
+Help about Challis is available at <http://github.com/chneukirchen/challis>
 
 The following features are disabled:
 
@@ -95,3 +98,11 @@ These things change:
 * Emphasizing (`<em>`) is done by surrounding with `_`'s
 * Strong (`<strong>`) is done by surrounding with `*`'s
 * You can link to an issue using the notation `#<issue_number>`
+
+You can easily override the formatter by redefining `ShitStorm::Markup#to_html`
+
+## Contributors ##############################################################
+
+* [webs][1]: Hashtags support, UI improvements (faster searches)
+
+[1]: http://github.com/webs
