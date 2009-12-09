@@ -9,7 +9,9 @@ module ShitStorm
       set :name,  "ShitStorm"
       set :url,   "http://example.com/"
       set :email, "admin@example.com"
-      set :dict,  Proc.new { YAML.load(File.read("lang/#{lang}.yml")) }
+      set :dict,  Proc.new {
+        YAML.load File.read(File.join(LIB_DIR, "lang", "#{lang}.yml"))
+      }
       set :methodoverride, true
       set :raise_errors, false
     end
