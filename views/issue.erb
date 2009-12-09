@@ -5,10 +5,10 @@
     &nbsp;<% @issue.hashtags.each do |tag| %><a href="/?q=<%= tag.gsub('#', '%23')%>" title="Tag <%= tag %>" class="hashtag"><%= tag %></a>&nbsp;<% end %>
     <div id="status_changer">
       <form action="/<%= @issue.id %>" method="POST">
-        <select name="status">
-        <% [:open, :pending, :closed, :rejected].each do |status| %>
-          <%= option_tag status, @issue.status %>
-        <% end %>
+        <select name="status"><%
+          [:open, :pending, :closed, :rejected].each do |status| %>
+          <%= option_tag(status, @issue.status) %><%
+          end %>
         </select>
         <input type="submit" value="<%= dict[:update] %>" />
         <input type="hidden" name="_method" value="PUT" />

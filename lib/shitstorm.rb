@@ -220,7 +220,7 @@ module ShitStorm
     end
 
     def self.search(query)
-      return Issue.order(:id.desc) unless query
+      return Issue.order(:id.desc) if query.nil? || query.empty?
 
       filter(query.split(/ +/).map { |chunk|
         case chunk
