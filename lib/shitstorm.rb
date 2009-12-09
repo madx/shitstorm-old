@@ -198,11 +198,11 @@ module ShitStorm
     def url
       "/#{id}"
     end
-    
+
     def title_without_hashtags
       title.gsub(/(#\w+)/, '')
     end
-    
+
     def hashtags
       tags = []
       title.gsub(/(#\w+)/) { |a| tags << a }
