@@ -13,7 +13,6 @@ module ShitStorm
         YAML.load File.read(File.join(LIB_DIR, "lang", "#{lang}.yml"))
       }
       set :methodoverride, true
-      set :raise_errors, false
     end
 
     helpers do
