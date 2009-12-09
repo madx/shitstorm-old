@@ -200,12 +200,12 @@ module ShitStorm
     end
 
     def title_without_hashtags
-      title.gsub(/(#\w+)/, '')
+      title.gsub(/#(\S+)/, '\1')
     end
 
     def hashtags
       tags = []
-      title.gsub(/(#\w+)/) { |a| tags << a }
+      title.gsub(/(#\S+)/) { |a| tags << a }
       tags
     end
 
