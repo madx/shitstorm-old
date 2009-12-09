@@ -1,5 +1,6 @@
-# A lightweight markup based on Challis <github.com/chneukirchen/challis>
+#coding: utf-8
 
+# A lightweight markup based on Challis <github.com/chneukirchen/challis>
 module ShitStorm
   class Markup < String
     def pfmt(t)
