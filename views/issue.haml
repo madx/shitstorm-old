@@ -1,0 +1,45 @@
+#issue
+  %h2
+    = flag_link(@issue)
+    = @issue.title_without_hashtags
+    - @issue.hashtags.each do |tag|
+      %a.hashtag{:href => "/?q=#{tag.gsub('#', '%23')}", :title => "Tag #{tag}"}
+        = tag
+    #status_changer
+      %form{:method => "POST", :action => "/#{@issue.id}"}
+        %select{:name => "status"}
+          - [:open, :pending, :closed, :rejected].each do |status|
+            = option_tag(status, @issue.status)
+        %input{:type => "submit", :value => dict[:update]}
+        %input{:name => "_method", :type => "hidden", :value => "PUT"}
+  %p.issue_report
+    = dict[:created_on] % @issue.ctime.strftime(dict[:timefmt])
+    = author_search_link(@issue)
+  - unless @issue.body.strip.empty?
+    .issue_body
+      = @issue.body
+  %h3
+    = dict[:comments]
+  - if @issue.comments.empty?
+    %p
+      = dict[:no_comments]
+  - else
+    - @issue.comments.each do |comment|
+      .comment
+        .comment_body
+          = comment.body
+        %p.comment_report
+          = dict[:posted_on] % comment.ctime.strftime(dict[:timefmt])
+          = author_search_link(comment)
+  %h3= dict[:add_comment]
+  #new_comment
+    %form{:method => "post", :action => "#{@issue.url}/comment"}
+      %p
+        %label{:for => "author"}
+          = dict[:author]
+        = author_field
+      %p
+        %label{:for => "body"}
+          = dict[:body]
+        %textarea{:name => "body", :rows => "7", :cols => "80"}
+      %input{:type => "submit", :value => dict[:submit]}

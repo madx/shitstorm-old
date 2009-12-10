@@ -4,7 +4,7 @@ module ShitStorm
   class App < Sinatra::Base
 
     configure do
-      set :haml,  :attr_wrapper => "'"
+      set :haml,  :attr_wrapper => '"'
       set :lang,  "en"
       set :name,  "ShitStorm"
       set :url,   "http://example.com/"
@@ -80,13 +80,13 @@ module ShitStorm
 
       @events = Event.order(:id.desc).limit(20)
 
-      erb :feed, :layout => false
+      haml :feed, :layout => false
     end
 
     get '/' do
       @issues = Issue.search(params[:q])
 
-      erb :index
+      haml :index
     end
 
     get '/favicon.ico' do
@@ -96,23 +96,23 @@ module ShitStorm
     get '/log/:id' do
       @entry = find(Entry)
 
-      erb :entry
+      haml :entry
     end
 
     get '/log' do
       @entries = Entry.order(:id.desc)
 
-      erb :log
+      haml :log
     end
 
     get '/add' do
-      erb :add
+      haml :add
     end
 
     get '/:id' do
       @issue = find(Issue)
 
-      erb :issue
+      haml :issue
     end
 
     post '/' do
@@ -176,7 +176,7 @@ module ShitStorm
     end
 
     error NotFound do
-      erb :not_found
+      haml :not_found
     end
 
   end

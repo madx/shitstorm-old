@@ -1,0 +1,40 @@
+!!! XML
+%feed{:xmlns => "http://www.w3.org/2005/Atom"}
+  %id
+    = settings.url
+  %title
+    = dict[:log_name] % settings.name
+  - if @events.first
+    %updated
+      = @events.first.ctime.xmlschema
+  - else
+    %updated
+      = Time.now.xmlschema
+  %link{:href => settings.url}
+  %link{:href => File.join(settings.url, 'feed'), :rel => "self"}
+  %author
+    %name
+      = settings.name
+    %email
+      = settings.email
+    %uri
+      = settings.url
+  - @events.each do |event|
+    %entry
+      %id
+        = event.url
+      %title{:type => "html"}
+        = event.message
+      %updated
+        = event.ctime.xmlschema
+      %author
+        %name
+          = settings.name
+        %email
+          = settings.email
+        %uri
+          = settings.url
+      %link{:href => event.url, :rel => "alternate"}
+      %summary{:type => "xhtml"}
+        %div{:xmlns => "http://www.w3.org/1999/xhtml"}
+          = event.message

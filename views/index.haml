@@ -1,0 +1,25 @@
+%form{:method => "get", :action => "/"}
+  #filter
+    %input{:name => "q", :type => "text", :value => params[:q]}
+    %input{:type => "submit", :value => dict[:search]}
+%ul#issues
+  - @issues.each do |issue|
+    %li{:class => "issue #{issue.status}"}
+      %a{:href => "/?q=is:#{issue.status}", :title => dict[:see_status][issue.status.to_sym]}
+        %img{:src => "/data/flag_#{issue.status}.png", :alt => dict[issue.status.to_sym]}
+      %span.title
+        %a{:href => issue.url, :title => dict[:view_issue]}
+          = issue.title_without_hashtags
+        - issue.hashtags.each do |tag|
+          %a.hashtag{:href => "/?q=#{tag.gsub('#', '%23')}", :title => "Tag #{tag}"}
+            = tag
+      %span.details
+        %span.id
+          == ##{issue.id}
+        %img{:title => issue.ctime.strftime("%F %R"), :src => "data/date.png", :alt => "Date"}
+        %span.comment_details
+          %img{:src => "data/comments.png", :alt => "Comments:"}
+          %span.comment_count
+            = issue.comments.length
+        %span.author
+          = author_search_link(issue)

@@ -1,0 +1,33 @@
+#entry
+  %h2
+    = @entry.title
+  %p.entry_report
+    = dict[:created_on] % @entry.ctime.strftime(dict[:timefmt])
+    = author_search_link(@entry)
+  - unless @entry.body.strip.empty?
+    .entry_body
+      = @entry.body
+  %h3= dict[:comments]
+  - if @entry.comments.empty?
+    %p
+      = dict[:no_comments]
+  - else
+    - @entry.comments.each do |comment|
+      .comment
+        .comment_body
+          = comment.body
+        %p.comment_report
+          = dict[:posted_on] % comment.ctime.strftime(dict[:timefmt])
+          = author_search_link(comment)
+  %h3= dict[:add_comment]
+  #new_comment
+    %form{:method => "post", :action => "#{@entry.url}/comment"}
+      %p
+        %label{:for => "author"}
+          = dict[:author]
+        = author_field
+      %p
+        %label{:for => "body"}
+          = dict[:body]
+        %textarea{:name => "body", :rows => "7", :cols => "80"}
+      %input{:type => "submit", :value => dict[:submit]}

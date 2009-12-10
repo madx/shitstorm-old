@@ -1,6 +1,7 @@
 #coding: utf-8
 
 require 'yaml'
+require 'haml'
 require 'sinatra'
 require 'sequel'
 
