@@ -16,30 +16,26 @@
     = dict[:created_on] % @issue.ctime.strftime(dict[:timefmt])
     = author_search_link(@issue)
   - unless @issue.body.strip.empty?
-    .issue_body
-      = @issue.body
-  %h3
-    = dict[:comments]
+    .issue_body= @issue.body
+
+  %h3= dict[:comments]
   - if @issue.comments.empty?
-    %p
-      = dict[:no_comments]
+    %p= dict[:no_comments]
   - else
     - @issue.comments.each do |comment|
       .comment
-        .comment_body
-          = comment.body
+        .comment_body= comment.body
         %p.comment_report
           = dict[:posted_on] % comment.ctime.strftime(dict[:timefmt])
           = author_search_link(comment)
+
   %h3= dict[:add_comment]
   #new_comment
     %form{:method => "post", :action => "#{@issue.url}/comment"}
       %p
-        %label{:for => "author"}
-          = dict[:author]
+        %label{:for => "author"}= dict[:author]
         = author_field
       %p
-        %label{:for => "body"}
-          = dict[:body]
+        %label{:for => "body"}= dict[:body]
         %textarea{:name => "body", :rows => "7", :cols => "80"}
       %input{:type => "submit", :value => dict[:submit]}
