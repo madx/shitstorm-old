@@ -1,0 +1,13 @@
+For 0.2:
+
+  * Split entries from log [DONE]
+  * Add hashtags support [DONE]
+  * Add a robust event system
+  * Switch to HAML [DONE]
+  * Add status changes in issue view
+  * Redesign the translation system to have more readable views
+  * Add search on entries
+
+For 0.3:
+
+  * Redesign the UI (cleanup + look and feel)
