@@ -41,6 +41,10 @@ this:
 
     require 'lib/shitstorm'
 
+    if ShitStorm::App.environment == :production
+      ShitStorm::App.set :raise_errors, false
+    end
+
     run(ShitStorm::App.tap {|config|
       config.set :name, "My Issue Tracker" # defaults to ShitStorm
       config.set :lang, "en"               # defaults to en
