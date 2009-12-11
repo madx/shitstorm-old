@@ -20,7 +20,7 @@ module ShitStorm
     end
 
     def self.create(params)
-      super(params.merge(:ctime => Time.now))
+      super({:ctime => Time.now}.merge(params))
     end
   end
 end
