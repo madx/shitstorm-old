@@ -29,6 +29,10 @@ module ShitStorm
       Event.create(:new_issue, self)
     end
 
+    def self.create(params)
+      super(params.merge(:ctime => Time.now, :status => "open"))
+    end
+
     def self.search(query)
       return Issue.order(:id.desc) if query.nil? || query.empty?
 

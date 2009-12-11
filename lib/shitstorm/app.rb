@@ -119,7 +119,7 @@ module ShitStorm
       halt_unless_param :title
       set_author_cookie!
 
-      Issue.create(params.merge({:ctime => Time.now, :status => "open"}))
+      Issue.create(params)
 
       redirect '/'
     end
@@ -128,7 +128,7 @@ module ShitStorm
       halt_unless_param :title
       set_author_cookie!
 
-      Entry.create(params.merge({:ctime => Time.now}))
+      Entry.create(params)
 
       redirect '/log'
     end

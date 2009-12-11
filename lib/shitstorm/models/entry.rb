@@ -18,5 +18,9 @@ module ShitStorm
       super
       Event.create(:new_entry, self)
     end
+
+    def self.create(params)
+      super(params.merge(:ctime => Time.now))
+    end
   end
 end
