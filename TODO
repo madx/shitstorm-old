@@ -4,9 +4,10 @@ For 0.2:
   * Add hashtags support [DONE]
   * Add a robust event system
   * Switch to HAML [DONE]
-  * Add status changes in issue view
+  * Add status changes in issue view [DONE]
   * Redesign the translation system to have more readable views
   * Add search on entries
+  * Add tests. Lots of tests [DONE]
 
 For 0.3:
 
