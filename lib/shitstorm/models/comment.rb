@@ -26,5 +26,9 @@ module ShitStorm
     def entry
       Entry[:id => entry_id]
     end
+
+    def self.create(params)
+      super({:ctime => Time.now}.merge(params))
+    end
   end
 end

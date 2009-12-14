@@ -141,7 +141,7 @@ module ShitStorm
 
       data = params.reject { |k,v|
         !%w(author body).member?(k)
-      }.update({:issue_id => params[:id], :ctime => Time.now})
+      }.update(:issue_id => params[:id])
 
       Comment.create(data)
 
@@ -156,7 +156,7 @@ module ShitStorm
 
       data = params.reject { |k,v|
         !%w(author body).member?(k)
-      }.update({:entry_id => params[:id], :ctime => Time.now})
+      }.update(:entry_id => params[:id])
 
       Comment.create(data)
 
