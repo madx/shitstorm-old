@@ -2,6 +2,8 @@
 
 module ShitStorm
   class Entry < Sequel::Model
+    include ModelPlugin::URLizable
+
     one_to_many :comments
     one_to_many :events
 

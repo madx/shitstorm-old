@@ -2,12 +2,10 @@
 
 module ShitStorm
   class Issue < Sequel::Model
+    include ModelPlugin::URLizable
+
     one_to_many :comments
     one_to_many :events
-
-    def url
-      "/#{id}"
-    end
 
     def title_without_hashtags
       title.gsub(/#(\S+)/, '\1')
