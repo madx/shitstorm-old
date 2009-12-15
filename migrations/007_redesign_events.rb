@@ -1,4 +1,4 @@
-class AddForeignKeysToEvents < Sequel::Migration
+class RedesignEvents < Sequel::Migration
   def up
     alter_table :events do
       add_column  :code, Integer
