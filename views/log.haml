@@ -4,9 +4,8 @@
     - @entries.each do |entry|
       %li.entry
         %span.details
-          %span.id == ##{entry.id}
-          %span.comment_count
-            == (#{entry.comments.length})
+          %span.id ##{entry.id}
+          %span.comment_count (#{entry.comments.length})
           %span.ctime=  entry.ctime.strftime("%F %R")
           %span.author= author_search_link(entry)
         %span.title
