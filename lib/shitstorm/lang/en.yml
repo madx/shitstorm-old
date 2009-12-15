@@ -13,8 +13,9 @@
 :event:
   :new_issue: "%s created issue %s"
   :new_entry: "%s posted entry %s"
-  :issue_comment: "%s commented on issue %s"
-  :entry_comment: "%s commented on entry %s"
+  :new_comment_on_issue: "%s commented on issue %s"
+  :new_comment_on_entry: "%s commented on entry %s"
+  :issue_status_change: "issue %s has been marked as %s"
 :home: "Return to issues list"
 :issue: "Issue"
 :issues: "Issues"

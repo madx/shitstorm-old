@@ -15,7 +15,7 @@
   - @events.each do |event|
     %entry
       %id= event.url
-      %title{:type => "html"}= event.message
+      %title{:type => "html"}= event.title
       %updated= event.ctime.xmlschema
       %author
         %name=  settings.name
@@ -23,4 +23,4 @@
         %uri=   settings.url
       %link{:href => event.url, :rel => "alternate"}
       %summary{:type => "xhtml"}
-        %div{:xmlns => "http://www.w3.org/1999/xhtml"}= event.message
+        %div{:xmlns => "http://www.w3.org/1999/xhtml"}= event.body

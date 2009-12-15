@@ -13,8 +13,9 @@
 :event:
   :new_issue: "%s a créé la requête %s"
   :new_entry: "%s a publié la note %s"
-  :issue_comment: "%s a commenté la requête %s"
-  :entry_comment: "%s a commenté la note %s"
+  :new_comment_on_issue: "%s a commenté la requête %s"
+  :new_comment_on_entry: "%s a commenté la note %s"
+  :issue_status_change: "la requête %s a été marquée comme %s"
 :home: "Retourner à la liste des requêtes"
 :issue: "Requête"
 :issues: "Requêtes"
