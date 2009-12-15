@@ -13,9 +13,9 @@ module ShitStorm
     def after_create
       super
       if issue_id
-        Event.create(:issue_comment, Issue[issue_id])
+        Event.create(:new_comment_on_issue, Issue[issue_id])
       elsif entry_id
-        Event.create(:entry_comment, Entry[entry_id])
+        Event.create(:new_comment_on_entry, Entry[entry_id])
       end
     end
 

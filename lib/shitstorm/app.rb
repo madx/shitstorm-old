@@ -168,9 +168,7 @@ module ShitStorm
 
       issue = find(Issue)
 
-      if params[:status] != issue.status
-        issue.update :status => params[:status]
-      end
+      issue.update :status => params[:status]
 
       redirect issue.url
     end

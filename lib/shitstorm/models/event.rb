@@ -5,10 +5,18 @@ module ShitStorm
     many_to_one :issues
     many_to_one :entries
 
-    def self.create(mode, obj)
+    CODES = {
+      :new_issue            => 1,
+      :new_entry            => 2,
+      :new_comment_on_issue => 3,
+      :new_comment_on_entry => 4,
+      :issue_status_change  => 5
+    }
+
+    def self.create(event, obj)
       super({
         :url => obj.url,
-        :message => App.dict[:event][mode] % [obj.author, obj.id],
+        :code => CODES[event],
         :ctime => Time.now,
       })
     end

@@ -27,6 +27,16 @@ module ShitStorm
       Event.create(:new_issue, self)
     end
 
+    def after_update
+      super
+      Event.create(:issue_status_change, self) if status != @old_status
+    end
+
+    def self.update(params)
+      params.each { |k,v| instance_variable_set("@old_#{k}", v) }
+      super(params)
+    end
+
     def self.create(params)
       super({:ctime => Time.now, :status => "open"}.merge(params))
     end
