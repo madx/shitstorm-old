@@ -2,13 +2,13 @@ For 0.2:
 
   * Split entries from log [DONE]
   * Add hashtags support [DONE]
-  * Add a robust event system
+  * Add a robust event system [DONE]
   * Switch to HAML [DONE]
   * Add status changes in issue view [DONE]
   * Redesign the translation system to have more readable views
-  * Add search on entries
   * Add tests. Lots of tests
 
 For 0.3:
 
   * Redesign the UI (cleanup + look and feel)
+  * Add search on entries
