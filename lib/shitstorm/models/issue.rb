@@ -37,8 +37,8 @@ module ShitStorm
       super(params)
     end
 
-    def self.create(params)
-      super({:ctime => Time.now, :status => "open"}.merge(params))
+    def self.create(params, &block)
+      super({:ctime => Time.now, :status => "open"}.merge(params), &block)
     end
 
     def self.search(query)
