@@ -1,0 +1,5 @@
+- Better error handling
+- Build the search engine
+- Add a <link> for the feed
+- Add some specs
+- Make state switching easier
