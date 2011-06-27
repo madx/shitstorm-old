@@ -1,0 +1,9 @@
+<dt id="comment-<%= comment.id %>" class="comment">
+  <%= comment.author.name %>
+  <span class="comment-meta"><%=
+    comment.created_at.strftime('%F @ %R')
+  %></span>
+</dt>
+<dd>
+  <%= comment.body_markup %>
+</dd>

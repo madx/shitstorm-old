@@ -1,7 +1,5 @@
-require 'lib/shitstorm'
+require File.join(File.dirname(__FILE__), 'lib', 'shitstorm')
 
-if ShitStorm::App.environment == :production
-  ShitStorm::App.set :raise_errors, false
-end
+::Shitstorm::App.set :session_secret, "dev"
 
-run ShitStorm::App
+run ::Shitstorm::App

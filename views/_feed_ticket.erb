@@ -1,0 +1,13 @@
+<entry>
+  <title>
+    <%= ticket.author.name %> created ticket #<%= ticket.id %>
+  </title>
+  <link href="<%= @url %>/<%= ticket.id %>" />
+  <id>shitstorm:<%= @url %>/<%= ticket.id %></id>
+  <updated><%= ticket.created_at.xmlschema %></updated>
+  <summary type="xhtml">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <%= ticket.body_markup %>
+    </div>
+  </summary>
+</entry>

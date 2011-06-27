@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Shitstorm</title>
+  <link rel="stylesheet" href="<%= url '/stylesheet.css' %>" type="text/css" />
+</head>
+<body>
+
+<div id="head">
+  <p id="login-box">
+    <%- if authenticated? %>
+      logged in as <strong><%= username %></strong>
+      <%- if admin? %>
+        – <a href="/manage" title="Manage users">manage</a>
+      <%- end %>
+      –
+      <a href="<%= url '/logout' %>">logout</a>
+    <%- else %>
+      <a href="<%= url '/login' %>">login</a>
+    <%- end %>
+  </ul>
+
+  <h1><a href="<%= url '/' %>" title="Back to home">Shitstorm</a></h1>
+</div>
+
+<div id="main">
+  <%= yield %>
+</div>
+
+
+<p id="footer">
+  powered by <a href="http://github.com/madx/shitstorm">Shitstorm</a>
+</p>
+
+</body>
+</html>

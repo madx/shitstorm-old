@@ -1,7 +1,0 @@
-Please respect these guidelines when you want to contribute:
-
-* 80 chars/line max, indent in the same style I use
-* If you have modified the CSS SASS source, either don't commit the .css or
-  regenerate it using: 
-    $ sass -t expanded data/stylesheet.sass > data/stylesheet.css
-* No whitespace at EOLs please!

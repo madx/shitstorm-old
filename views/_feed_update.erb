@@ -1,0 +1,9 @@
+<entry>
+  <title>
+    <%= update.author.name %> marked #<%= update.id %> as
+    <%= update.active ? 'active' : 'resolved' %>
+  </title>
+  <link href="<%= @url %>/<%= update.id %>" />
+  <id>shitstorm:<%= @url %>@<%= update.id %></id>
+  <updated><%= update.created_at.xmlschema %></updated>
+</entry>

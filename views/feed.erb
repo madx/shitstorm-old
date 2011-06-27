@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title>Shitstorm activity feed</title>
+  <link href="<%= @url %>"/>
+  <updated><%= @items.first.created_at.xmlschema %></updated>
+  <id>
+    shitstorm/<%= @url %>
+  </id>
+
+  <%- @items.each do |item| %>
+    <%=
+      tpl = item.class.to_s.gsub(/.*::(.*)/, '\1').downcase.to_sym 
+      partial :"feed_#{tpl}", :locals => {tpl => item}
+    %>
+  <%- end %>
+</feed>

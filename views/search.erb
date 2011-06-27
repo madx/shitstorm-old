@@ -1,0 +1,25 @@
+<%= partial :toolbox %>
+
+<%- if @tickets.empty? %>
+  <h2>No tickets</h2>
+<%- else %>
+  <ul class="ticket-list">
+    <%- @tickets.each_with_index do |ticket, i| %>
+      <li class="<%= ['ticket', ticket.css_class].join(' ') %>">
+        <span class="ticket-id">#<%= ticket.id %></span>
+        <a href="<%= url("/#{ticket.id}") %>"><%= ticket.title %></a>
+        <p class="ticket-meta">
+          by
+          <a href="<%= url("/?q=by:#{ticket.author.name}") %>"><%=
+            ticket.author.name
+            %></a>,
+          <%= ticket.created_at.strftime("%F @ %R") %> –
+          <a href="<%= url("/#{ticket.id}#comments") %>">
+            <%= ticket.comments.count %>
+            <%= ticket.comments.count == 1 ? "comment" : "comments" %>
+          </a>
+        </p>
+      </li>
+    <%- end %>
+  </table>
+<%- end %>

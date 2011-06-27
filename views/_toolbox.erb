@@ -1,0 +1,20 @@
+<ul id="toolbox">
+  <li id="toolbox-filter">Filters:</li>
+  <li class="filter"><a href="<%= url '/?q=is:active' %>">Active</a></li>
+  <li class="filter"><a href="<%= url '/?q=is:resolved' %>">Resolved</a></li>
+  <% if authenticated? %>
+    <li class="filter"><a href="<%= url '/?q=by:%s' % username %>">Mine</a></li>
+    <li class="filter"><a href="<%= url '/?q=@%s' % username %>">Mentioning me</a></li>
+  <% end %>
+  <li id="search">
+    <form action="/" method="GET">
+      <label for="search-q">Search:</label>
+      <input type="text" name="q" id="search-q" value="<%= params[:q] %>" />
+    </form>
+  </li>
+  <% if authenticated? %>
+    <li id="toolbox-open">
+      <a href="<%= url '/new' %>">Open a ticket</a>
+    </li>
+  <% end %>
+</ul>

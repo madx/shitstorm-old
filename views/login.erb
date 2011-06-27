@@ -1,0 +1,15 @@
+<div class="form">
+  <h2>Login</h2>
+  <form action="<%= url('/login')%>" method="POST" class="login">
+    <p>
+      <label for="login-token">Key:</label>
+      <input type="text" name="token" id="login-token" size="40" value="<%=
+        params[:token]
+      %>"/>
+    </p>
+    <%- if @error %>
+    <span class="error">This key is invalid</span>
+    <%- end %>
+    <input type="submit" value="Login" />
+  </form>
+</div>

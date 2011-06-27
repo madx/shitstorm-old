@@ -1,0 +1,46 @@
+<%= partial :toolbox %>
+
+<div class="<%= ['ticket', @ticket.css_class].join(' ') %>">
+  <a class="ticket-id" href="<%= url("/#{@ticket.id}/toggle")%>"
+     title="Mark as <%=
+       @ticket.active ? 'resolved' : 'active'%>">#<%= @ticket.id %></a>
+  <a href="<%= url("/#{@ticket.id}") %>"><%= @ticket.title %></a>
+  <div class="ticket-body">
+    <%= @ticket.body_markup %>
+  </div>
+  <p class="ticket-meta">
+    by
+    <a href="<%= url("/?q=by:#{@ticket.author.name}") %>"><%=
+      @ticket.author.name
+      %></a>,
+    <%= @ticket.created_at.strftime("%F @ %R") %> –
+    <a href="<%= url("/#{@ticket.id}#comments") %>">
+      <%= @ticket.comments.count %>
+      <%= @ticket.comments.count == 1 ? "comment" : "comments" %>
+    </a>
+  </p>
+
+  <div class="comments">
+    <h2>Discussion</h2>
+
+    <dl id="comments">
+      <%- unless @ticket.comments.empty? %>
+        <%- @ticket.feed.each_with_index do |item| %>
+          <%- if item.is_a? Shitstorm::Comment %>
+            <%= partial :comment, :locals => {comment: item} %>
+          <%- else %>
+            <%= partial :update, :locals => {update: item} %>
+          <%- end %>
+        <%- end %>
+      <%- end %>
+    </dl>
+    <%- if authenticated? %>
+    <form action="<%= url("/#{@ticket.id}/comment") %>" method="POST">
+      <p class="comment-form">
+        <textarea name="body" rows="5"></textarea>
+        <input type="submit" value="Comment" />
+      </p>
+    </form>
+    <%- end %>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<h2>Manage users</h2>
+
+<table class="users">
+  <thead>
+    <tr>
+      <th>Login</th> <th>Key</th> <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%- Shitstorm::User.all.each do |user| %>
+    <tr>
+      <td class="user-name"><%= user.name %></td>
+      <td class="user-key"><%= user.token %></td>
+      <td class="user-<%= user.active ? 'revoke' : 'allow' %>">
+        <a href="<%= url("/manage/toggle/#{user.id}")
+          %>"><%= user.active ? 'revoke' : 'active' %></a>
+      </td>
+      <td class="user-regen">
+        <a href="<%= url("/manage/regen/#{user.id}") %>">regen</a>
+      </td>
+    </tr>
+  <%- end %>
+  </tbody>
+</table>
+
+<div class="form">
+  <h2>Add an user</h2>
+  <form action="<%= url('/manage/add')%>" method="POST" class="login">
+    <p>
+    <label for="user-name">Name:</label>
+    <input type="text" name="name" id="user-name" size="40" value="<%=
+      params[:name] %>"/>
+    </p>
+    <%- if @error %>
+    <span class="error">This name is invalid</span>
+    <%- end %>
+    <input type="submit" value="Add" />
+  </form>
+</div>

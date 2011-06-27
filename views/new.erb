@@ -1,0 +1,21 @@
+<div class="form">
+  <h2>New ticket</h2>
+  <form action="<%= url('/new') %>" method="POST">
+    <p>
+      <label for="ticket-title"<%=
+        ' class="error"' if @ticket && !@ticket.errors[:title].empty?
+      %>>Title:</label>
+      <input type="text" id="ticket-title" name="title" value="<%=
+        params[:title] %>" />
+    </p>
+    <p>
+      <label for="ticket-body"<%=
+        ' class="error"' if @ticket && !@ticket.errors[:body].empty?
+      %>>Body:</label>
+      <textarea id="ticket-body" name="body" rows="10"><%=
+        params[:body]
+      %></textarea>
+    </p>
+    <input type="submit" value="Create" />
+  </form>
+</div>

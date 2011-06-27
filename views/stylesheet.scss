@@ -1,0 +1,359 @@
+$green: #66ae32;
+$red: #ae4e32;
+$lightgray: #eeeeee;
+$darkgray: #444444;
+$mediumgray: lighten($darkgray, 30%);
+$border: #cccccc;
+
+@mixin a-set($normal, $hover, $uline: underline) {
+  a {
+    &:link, &:visited {
+      color: $normal;
+      text-decoration: none;
+    }
+
+    &:hover, &:active, &:focus {
+      text-decoration: $uline;
+      color: $hover;
+    }
+  }
+}
+
+@mixin border-radius($amount) {
+  -webkit-border-radius: $amount;
+  -moz-border-radius: $amount;
+  border-radius: $amount;
+}
+
+@mixin gradient($from, $to) {
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, $from),
+    color-stop(1, $to)
+  );
+  background-image: -moz-linear-gradient(
+    center bottom,
+    $to 0%,
+    $from 100%
+  );
+
+}
+
+@mixin text-shadow($color) {
+  text-shadow: 1px 1px 1px $color;
+}
+
+@mixin a-button($normal, $normal_bg, $hover, $hover_bg, $shade, $shade_hov) {
+  a {
+    &:link, &:visited {
+      padding: 0.25rem 0.75rem 0.3rem;
+      @include border-radius(0.5em);
+      color: $normal;
+      @include text-shadow($shade);
+      @include gradient($normal_bg, darken($normal_bg, 13.5%));
+    }
+    &:hover, &:active, &:focus {
+      text-decoration: none;
+      color: $hover;
+      @include text-shadow($shade_hov);
+      @include gradient($hover_bg, darken($hover_bg, 13.5%));
+    }
+  }
+}
+
+
+body {
+  width: 70%;
+  margin: 2em auto;
+  background-color: white;
+  color: $darkgray;
+  font-family: Helvetica, Arial, Freesans, sans-serif;
+}
+
+@include a-set($red, $darkgray);
+
+#head, #main, #footer {
+  width: 80%;
+  margin: 1em 0 0;
+}
+
+img {
+  vertical-align: middle;
+}
+
+#head {
+  border-bottom: 1px solid $border;
+  padding-bottom: 1em;
+
+  h1 {
+    margin: 0;
+    font-size: 2.5em;
+    @include a-set($darkgray, $red, none);
+  }
+
+  #login-box {
+    float: right;
+    font-size: 1.2em;
+    margin: 1em 0 0;
+    padding: 0;
+    list-style-type: none;
+
+    li {
+      display: inline-block;
+      margin-left: 1em;
+    }
+  }
+}
+
+#main {
+  .form {
+    label {
+      display: inline-block;
+      font-weight: bold;
+      margin: 0 1%;
+      width: 10%;
+      text-align: right;
+      &.error {
+        color: $red;
+        &:before { content: "* " }
+      }
+    }
+
+    span.error {
+      margin-left: 12%;
+      color: $red;
+    }
+
+    input[type=text] {
+      width: 50%;
+    }
+
+    textarea {
+      width: 50%;
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    input[type=submit] {
+      display: block;
+      margin: 1em 1em 1em 12.5%;
+    }
+  }
+
+  h2 {
+    font-size: 1.4em;
+  }
+
+  #toolbox {
+    list-style-type: none;
+    padding: 0;
+    margin: 1em 0;
+    font-size: 1.2em;
+
+    li {
+      display: inline-block;
+
+      &#toolbox-open {
+        float: right;
+        @include a-button(white, $red, white, $darkgray, black, black);
+      }
+      &#search {
+        margin-left: 1em;
+      }
+      &.filter {
+        @include a-button($darkgray, $lightgray, white, $darkgray, white, black);
+      }
+    }
+  }
+
+  .ticket-list {
+    width: 100%;
+    margin: 1em 0;
+    padding: 0;
+    list-style-type: none;
+  }
+
+  .ticket {
+    padding: 0.75em;
+    margin-bottom: 1em;
+    @include border-radius(5px);
+    @include gradient($lightgray, $border);
+
+    @include a-set(black, $darkgray);
+    & > a {
+      font-size: 1.2em;
+      font-weight: bold;
+      @include text-shadow(white);
+      &:hover, &:active, &:focus {
+        text-decoration: none;
+      }
+    }
+    a.ticket-id {
+      font-weight: normal;
+      &:link, &:visited {
+        color: white;
+      }
+      &:hover, &:active, &:focus {
+      }
+    }
+    .ticket-id {
+      font-size: 1em;
+      display: block;
+      float: right;
+      padding: 0.25em 0.5em;
+      color: white;
+      @include text-shadow(black);
+      @include border-radius(5px);
+      margin-right: 0.75em;
+      margin-bottom: 2em;
+    }
+    &.active .ticket-id {
+      @include gradient($red, darken($red, 13.5%));
+    }
+    &.active a.ticket-id {
+      &:hover, &:active, &:focus {
+        @include gradient($green, darken($green, 13.5%));
+      }
+    }
+    &.resolved .ticket-id {
+      @include gradient($green, darken($green, 13.5%));
+    }
+    &.resolved a.ticket-id {
+      &:hover, &:active, &:focus {
+        @include gradient($red, darken($red, 13.5%));
+      }
+    }
+    .ticket-body {
+      @include gradient($lightgray, lighten($lightgray, 13.5%));
+      margin: 1em;
+      padding: 0.75em 0.75em 0.5em;
+      @include a-set($red, $darkgray);
+      *:first-child { margin-top: 0; }
+      *:last-child { margin-bottom: 0; }
+    }
+    .ticket-meta {
+      margin: 0.5em 0 0;
+      color: $mediumgray;
+      @include a-set($darkgray, black);
+    }
+    .comments {
+      width: 75%;
+      margin: 1em;
+
+      h2 {
+        font-size: 1.2em;
+        border-top: 1px solid $border;
+        padding: 0.25em;
+      }
+      dl {
+        dt {
+          margin: 1em 0 0;
+          padding: 0.25em 0.5em;
+          @include border-radius(5px);
+          @include text-shadow(black);
+          color: white;
+        }
+
+        .comment {
+          @include gradient($darkgray, darken($darkgray, 13.5%));
+          .comment-meta {
+            margin-left: 0.5em;
+            color: $mediumgray;
+          }
+        }
+        dt.update {
+          margin: 1.5em 0;
+          color: $lightgray;
+          &.active {
+            @include gradient($red, darken($red, 13.5%));
+          }
+          &.resolved {
+            @include gradient($green, darken($green, 13.5%));
+          }
+        }
+        dd {
+          @include gradient($lightgray, lighten($lightgray, 13.5%));
+          margin: 0 2% 1em;
+          padding: 0.75em 0.75em 0.5em;
+          @include a-set($red, $darkgray);
+          *:first-child { margin-top: 0; }
+          *:last-child { margin-bottom: 0; }
+
+        }
+      }
+      .comment-form {
+        border-top: 1px solid $border;
+        padding-top: 1em;
+
+        textarea {
+          width: 95%;
+          margin: 0 2% 1em;
+        }
+
+        input[type=submit] {
+          display: block;
+          margin: 0 2% 1em;
+        }
+      }
+    }
+  }
+
+  .users {
+    width: 100%;
+    padding: 0.25em;
+    border-collapse: collapse;
+    @include border-radius(5px);
+    @include gradient($lightgray, $border);
+    thead {
+      tr {
+        border-bottom: 1px solid $mediumgray;
+      }
+      th {
+        padding: 0.5em;
+        @include text-shadow(white);
+        text-align: center;
+        border-left: 1px solid $mediumgray;
+        &:first-child { border-left: none }
+      }
+    }
+    tbody {
+      td {
+        padding: 0.5em;
+        &.user-name {
+          text-align: center;
+        }
+        &.user-key {
+          text-align: left;
+          font-family: monospace;
+          border-left: 1px solid $mediumgray;
+        }
+        &.user-allow, &.user-revoke, &.user-regen {
+          text-align: center;
+        }
+        &.user-allow {
+          @include a-set($green, $darkgray);
+          border-left: 1px solid $mediumgray;
+        }
+        &.user-revoke {
+          @include a-set($red, $darkgray);
+          border-left: 1px solid $mediumgray;
+        }
+        &.user-regen {
+          @include a-set(black, $darkgray);
+        }
+      }
+    }
+  }
+}
+
+#footer {
+  color: $mediumgray;
+  text-align: right;
+  font-style: italic;
+  border-top: 1px solid $border;
+  padding-top: 1em;
+
+  @include a-set($darkgray, black);
+}

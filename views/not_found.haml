@@ -1,7 +1,0 @@
-%form{:method => "get", :action => "/"}
-  #filter
-    %input{:name => "q", :type => "text", :value => params[:q]}
-    %input{:type => "submit", :value => dict[:search]}
-#error
-  %h2= dict[:not_found]
-  %p= dict[:not_found_blurb]
