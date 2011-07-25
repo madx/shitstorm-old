@@ -2,7 +2,7 @@
   <title>
     <%= comment.author.name %> commented on ticket #<%= comment.ticket.id %>
   </title>
-  <link href="<%= @url %>/<%= comment.ticket.id %>#<%= comment.id %>"/>
+  <link href="<%= @url %>/<%= comment.ticket.id %>#comment-<%= comment.id %>"/>
   <id>shitstorm:<%= @url %>/<%= comment.ticket.id %>#<%= comment.id %></id>
   <updated><%= comment.created_at.xmlschema %></updated>
   <summary type="xhtml">

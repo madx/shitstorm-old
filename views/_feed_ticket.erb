@@ -1,6 +1,7 @@
 <entry>
   <title>
-    <%= ticket.author.name %> created ticket #<%= ticket.id %>
+    <%= ticket.author.name %> created ticket #<%= ticket.id %>:
+    <%= ticket.title %>
   </title>
   <link href="<%= @url %>/<%= ticket.id %>" />
   <id>shitstorm:<%= @url %>/<%= ticket.id %></id>

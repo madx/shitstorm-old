@@ -24,13 +24,11 @@
     <h2>Discussion</h2>
 
     <dl id="comments">
-      <%- unless @ticket.comments.empty? %>
-        <%- @ticket.feed.each_with_index do |item| %>
-          <%- if item.is_a? Shitstorm::Comment %>
-            <%= partial :comment, :locals => {comment: item} %>
-          <%- else %>
-            <%= partial :update, :locals => {update: item} %>
-          <%- end %>
+      <%- @ticket.feed.each_with_index do |item| %>
+        <%- if item.is_a? Shitstorm::Comment %>
+          <%= partial :comment, :locals => {comment: item} %>
+        <%- else %>
+          <%= partial :update, :locals => {update: item} %>
         <%- end %>
       <%- end %>
     </dl>
