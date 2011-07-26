@@ -182,20 +182,25 @@ img {
     @include gradient($lightgray, $border);
 
     @include a-set(black, $darkgray);
-    & > a {
-      font-size: 1.2em;
-      font-weight: bold;
-      @include text-shadow(white);
-      &:hover, &:active, &:focus {
-        text-decoration: none;
-      }
-    }
-    a.ticket-id {
-      font-weight: normal;
-      &:link, &:visited {
+    .ticket-head {
+      @include border-radius(5px);
+      @include gradient($darkgray, darken($darkgray, 13.5%));
+      padding: 0.5em;
+      a {
+        font-size: 1.2em;
+        font-weight: bold;
+        @include text-shadow(black);
         color: white;
+        &:hover, &:active, &:focus {
+          text-decoration: none;
+        }
       }
-      &:hover, &:active, &:focus {
+      a.ticket-id {
+        font-size: 1em;
+        font-weight: normal;
+        &:link, &:visited {
+          color: white;
+        }
       }
     }
     .ticket-id {
@@ -206,8 +211,6 @@ img {
       color: white;
       @include text-shadow(black);
       @include border-radius(5px);
-      margin-right: 0.75em;
-      margin-bottom: 2em;
     }
     &.active .ticket-id {
       @include gradient($red, darken($red, 13.5%));
@@ -227,8 +230,10 @@ img {
     }
     .ticket-body {
       @include gradient($lightgray, lighten($lightgray, 13.5%));
-      margin: 1em;
-      padding: 0.75em 0.75em 0.5em;
+      margin: 0 1em 1em;
+      border: 1px solid $border;
+      border-top: none;
+      padding: 1em 0.75em 0.75em;
       @include a-set($red, $darkgray);
       *:first-child { margin-top: 0; }
       *:last-child { margin-bottom: 0; }
@@ -280,7 +285,8 @@ img {
           @include a-set($red, $darkgray);
           *:first-child { margin-top: 0; }
           *:last-child { margin-bottom: 0; }
-
+          border: 1px solid $border;
+          border-top: none;
         }
       }
       .comment-form {
