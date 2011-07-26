@@ -14,7 +14,8 @@ module Shitstorm
   def self.markup(text)
     Calico.new(text).
       to_html.
-      gsub(/[^\\]#([1-9]\d+)/) { '<a href="%s">%s</a>' % ["/#{$1}", $&] }
+      gsub(/(?=[^\\])#([1-9]\d*)/) { '<a href="%s">%s</a>' % ["/#{$1}", $&] }.
+      gsub(/(?=[^\\])@([a-zA-Z_-]+)/) { '<a href="%s">%s</a>' % ["/?q=@#{$1}", $&] }
   end
 
   class User < Sequel::Model
