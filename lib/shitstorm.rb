@@ -12,10 +12,13 @@ module Shitstorm
   DB = Sequel.connect(YAML.load_file('db/database.yml'))
 
   def self.markup(text)
-    Calico.new(text).
-      to_html.
-      gsub(/(?=[^\\])#([1-9]\d*)/) { '<a href="%s">%s</a>' % ["/#{$1}", $&] }.
-      gsub(/(?=[^\\])@([a-zA-Z_-]+)/) { '<a href="%s">%s</a>' % ["/?q=@#{$1}", $&] }
+    Calico.new(text).to_html do |text|
+      text.gsub(/(?<!\w)#([1-9]\d*)/) {
+        '<a href="%s">%s</a>' % ["/#{$1}", $&]
+      }.gsub(/(?<!\w)@(\w+)/) {
+        '<a href="%s">%s</a>' % ["/?q=@#{$1}", $&]
+      }
+    end
   end
 
   class User < Sequel::Model
